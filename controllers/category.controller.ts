@@ -23,7 +23,7 @@ export const getAllCategoriesController = async(req: Request, res: Response)=>{
 
 export const getCategoriesByIdController = async(req: Request, res: Response)=>{
     try {
-        const id = req.params.id;
+        const id = parseInt( req.params.id);
         const categories = await getCategoriesById(id);
         res.status(200).json(categories)
     } catch (error: any) {

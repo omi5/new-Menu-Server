@@ -10,9 +10,24 @@ const getAllCategories = async()=>{
     const categories = await categoryModel.find();
     return categories;
 }
-
-const getCategoriesById = async(id: string)=>{
-    const category = await categoryModel.findOne({_id : id});
+//find filter category items using category ID
+const getCategoriesById = async(id: number)=>{
+    // findOne({_id : id});
+    const category = await categoryModel.aggregate([
+        {
+            $match: {
+                categoryId: id 
+            },
+          },
+          {
+            $lookup: {
+              from: 'menuitems',
+              localField: 'categoryId',
+              foreignField: 'categoryId',
+              as: 'listOfItems'
+            },
+          },
+    ])
     return category;
 }
 

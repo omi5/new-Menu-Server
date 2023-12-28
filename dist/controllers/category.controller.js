@@ -34,7 +34,7 @@ const getAllCategoriesController = (req, res) => __awaiter(void 0, void 0, void 
 exports.getAllCategoriesController = getAllCategoriesController;
 const getCategoriesByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
         const categories = yield (0, category_query_1.getCategoriesById)(id);
         res.status(200).json(categories);
     }

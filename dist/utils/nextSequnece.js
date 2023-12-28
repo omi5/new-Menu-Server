@@ -8,25 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.categoryModel = void 0;
-const mongoose_1 = require("mongoose");
-const nextSequnece_1 = require("../../utils/nextSequnece");
-const categorySchema = new mongoose_1.Schema({
-    restaurantId: { type: Number },
-    categoryId: { type: Number },
-    categoryName: { type: String, required: true },
-    categoryDescription: { type: String, required: true },
-    categoryImage: { type: String }
-});
-// Middleware to auto-increment tableId
-categorySchema.pre('save', function (next) {
+exports.getNextSequenceValue = void 0;
+const counter_model_1 = __importDefault(require("./counter.model"));
+const getNextSequenceValue = function (sequenceName) {
     return __awaiter(this, void 0, void 0, function* () {
-        const doc = this;
-        if (!doc.categoryId) {
-            doc.categoryId = yield (0, nextSequnece_1.getNextSequenceValue)('tableIdCounter');
-        }
-        next();
+        const sequenceDoc = yield counter_model_1.default.findOneAndUpdate({ _id: sequenceName }, { $inc: { sequence_value: 1 } }, { new: true, upsert: true });
+        return sequenceDoc.sequence_value;
     });
-});
-exports.categoryModel = (0, mongoose_1.model)('categories', categorySchema);
+};
+exports.getNextSequenceValue = getNextSequenceValue;

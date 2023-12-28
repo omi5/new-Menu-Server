@@ -21,8 +21,24 @@ const getAllCategories = () => __awaiter(void 0, void 0, void 0, function* () {
     return categories;
 });
 exports.getAllCategories = getAllCategories;
+//find filter category items using category ID
 const getCategoriesById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const category = yield category_model_1.categoryModel.findOne({ _id: id });
+    // findOne({_id : id});
+    const category = yield category_model_1.categoryModel.aggregate([
+        {
+            $match: {
+                categoryId: id
+            },
+        },
+        {
+            $lookup: {
+                from: 'menuitems',
+                localField: 'categoryId',
+                foreignField: 'categoryId',
+                as: 'listOfItems'
+            },
+        },
+    ]);
     return category;
 });
 exports.getCategoriesById = getCategoriesById;
