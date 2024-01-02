@@ -61,6 +61,7 @@ const itemSchema = new mongoose_1.Schema({
 const menuItemSchema = new mongoose_1.Schema({
     restaurantId: Number,
     categoryId: Number,
+    mealTimeId: Number,
     item: [itemSchema],
 });
 // Middleware to auto-increment tableId

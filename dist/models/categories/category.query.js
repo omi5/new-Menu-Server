@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategory = exports.updateCategoryById = exports.getCategoriesById = exports.getAllCategories = exports.createCategory = void 0;
+exports.getcategoryByUsingCategoryId = exports.deleteCategory = exports.updateCategoryById = exports.getCategoriesById = exports.getAllCategories = exports.createCategory = void 0;
 const category_model_1 = require("./category.model");
 const createCategory = (categoryObject) => __awaiter(void 0, void 0, void 0, function* () {
     const newCategory = yield category_model_1.categoryModel.create(Object.assign({}, categoryObject));
@@ -21,6 +21,11 @@ const getAllCategories = () => __awaiter(void 0, void 0, void 0, function* () {
     return categories;
 });
 exports.getAllCategories = getAllCategories;
+const getcategoryByUsingCategoryId = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const category = yield category_model_1.categoryModel.findOne({ categoryId: id });
+    return category;
+});
+exports.getcategoryByUsingCategoryId = getcategoryByUsingCategoryId;
 //find filter category items using category ID
 const getCategoriesById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     // findOne({_id : id});
@@ -43,12 +48,12 @@ const getCategoriesById = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getCategoriesById = getCategoriesById;
 const updateCategoryById = (id, categoryObject) => __awaiter(void 0, void 0, void 0, function* () {
-    const updateCategory = yield category_model_1.categoryModel.findByIdAndUpdate({ _id: id }, { $set: { categoryObject } }, { new: true });
+    const updateCategory = yield category_model_1.categoryModel.find({ categoryId: id }, Object.assign({}, categoryObject), { new: true });
     return updateCategory;
 });
 exports.updateCategoryById = updateCategoryById;
 const deleteCategory = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const removeCategory = yield category_model_1.categoryModel.findByIdAndDelete({ _id: id });
+    const removeCategory = yield category_model_1.categoryModel.findOneAndDelete({ categoryId: id });
     return removeCategory;
 });
 exports.deleteCategory = deleteCategory;

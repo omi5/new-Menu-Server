@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategoryController = exports.updateCategoryByIdController = exports.getCategoriesByIdController = exports.getAllCategoriesController = exports.createCategoryController = void 0;
+exports.getcategoryByUsingCategoryIdController = exports.deleteCategoryController = exports.updateCategoryByIdController = exports.getCategoriesByIdController = exports.getAllCategoriesController = exports.createCategoryController = void 0;
 const category_query_1 = require("../models/categories/category.query");
 const createCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -18,7 +18,8 @@ const createCategoryController = (req, res) => __awaiter(void 0, void 0, void 0,
         res.status(201).json(category);
     }
     catch (error) {
-        res.status(500).json({ error: error.message });
+        if (error instanceof Error)
+            res.status(500).json({ error: error.message });
     }
 });
 exports.createCategoryController = createCategoryController;
@@ -32,6 +33,7 @@ const getAllCategoriesController = (req, res) => __awaiter(void 0, void 0, void 
     }
 });
 exports.getAllCategoriesController = getAllCategoriesController;
+//Find all Items Under the category
 const getCategoriesByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(req.params.id);
@@ -45,7 +47,7 @@ const getCategoriesByIdController = (req, res) => __awaiter(void 0, void 0, void
 exports.getCategoriesByIdController = getCategoriesByIdController;
 const updateCategoryByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const categoryObject = Object.assign({}, req.body);
         const updatedCategory = yield (0, category_query_1.updateCategoryById)(id, categoryObject);
         res.json(updatedCategory);
@@ -57,7 +59,7 @@ const updateCategoryByIdController = (req, res) => __awaiter(void 0, void 0, voi
 exports.updateCategoryByIdController = updateCategoryByIdController;
 const deleteCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const deletedCategory = yield (0, category_query_1.deleteCategory)(id);
         res.json(deletedCategory);
     }
@@ -66,3 +68,15 @@ const deleteCategoryController = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.deleteCategoryController = deleteCategoryController;
+//Find All categories
+const getcategoryByUsingCategoryIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = Number(req.params.id);
+        const category = yield (0, category_query_1.getcategoryByUsingCategoryId)(id);
+        res.status(200).json(category);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+exports.getcategoryByUsingCategoryIdController = getcategoryByUsingCategoryIdController;

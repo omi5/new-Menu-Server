@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMealTime = exports.updateMealTimeById = exports.getMealTimeById = exports.getAllMealTime = exports.createMealTime = void 0;
+exports.getMealTimeByUsingId = exports.deleteMealTime = exports.updateMealTimeById = exports.getMealTimeById = exports.getAllMealTime = exports.createMealTime = void 0;
 const mealTime_model_1 = require("./mealTime.model");
 const createMealTime = (mealTimeObject) => __awaiter(void 0, void 0, void 0, function* () {
     const newMealTime = yield mealTime_model_1.mealTimeModel.create(Object.assign({}, mealTimeObject));
@@ -21,19 +21,42 @@ const getAllMealTime = () => __awaiter(void 0, void 0, void 0, function* () {
     return allMealTimes;
 });
 exports.getAllMealTime = getAllMealTime;
+//Find All items under this MealTime Schedule 
 const getMealTimeById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const findOneMealTime = yield mealTime_model_1.mealTimeModel.findOne({ _id: id }); //should also find by mealTimeId
-    return findOneMealTime;
+    // const findOneMealTime = await mealTimeModel.findOne({_id: id}); should also find by mealTimeId
+    // return findOneMealTime;
+    const findAllItemsUnderThisMealTime = yield mealTime_model_1.mealTimeModel.aggregate([
+        {
+            $match: {
+                mealTimeId: id
+            },
+        },
+        {
+            $lookup: {
+                from: 'menuitems',
+                localField: 'mealTimeId',
+                foreignField: 'mealTimeId',
+                as: 'listOfItems'
+            },
+        },
+    ]);
+    return findAllItemsUnderThisMealTime;
 });
 exports.getMealTimeById = getMealTimeById;
-const updateMealTimeById = (mealTimeId, mealTimeObject) => __awaiter(void 0, void 0, void 0, function* () {
+const updateMealTimeById = (id, menuTimeObject) => __awaiter(void 0, void 0, void 0, function* () {
     //In here also try of update by  using mealtimeId 
-    const updateMealTime = yield mealTime_model_1.mealTimeModel.findByIdAndUpdate({ _id: mealTimeId }, { $set: mealTimeObject }, { new: true });
+    const updateMealTime = yield mealTime_model_1.mealTimeModel.findOneAndUpdate({ mealTimeId: id }, Object.assign({}, menuTimeObject), { new: true });
     return updateMealTime;
 });
 exports.updateMealTimeById = updateMealTimeById;
 const deleteMealTime = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const removeMealTime = yield mealTime_model_1.mealTimeModel.findByIdAndDelete({ _id: id }); //In here we also  use mealTime id in the future 
+    const removeMealTime = yield mealTime_model_1.mealTimeModel.findOneAndDelete({ mealTimeId: id }); //In here we also  use mealTime id in the future 
     return removeMealTime;
 });
 exports.deleteMealTime = deleteMealTime;
+//Find Mealtime By Using The ID
+const getMealTimeByUsingId = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const findOneMealTime = yield mealTime_model_1.mealTimeModel.findOne({ mealTimeId: id }); //should also find by mealTimeId
+    return findOneMealTime;
+});
+exports.getMealTimeByUsingId = getMealTimeByUsingId;

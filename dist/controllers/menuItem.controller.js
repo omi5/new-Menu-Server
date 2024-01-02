@@ -34,7 +34,7 @@ const getAllMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0,
 exports.getAllMenuItemController = getAllMenuItemController;
 const getMenuItemByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const oneMenuItem = yield (0, menuItem_query_1.getMenuItemById)(id);
         res.status(200).json(oneMenuItem);
     }
@@ -45,7 +45,7 @@ const getMenuItemByIdController = (req, res) => __awaiter(void 0, void 0, void 0
 exports.getMenuItemByIdController = getMenuItemByIdController;
 const updateMenuItemByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const menuItemObject = Object.assign({}, req.body);
         const updatedmemuItem = (0, menuItem_query_1.updateMenuItemById)(id, menuItemObject);
         res.status(200).json(updatedmemuItem);
@@ -57,9 +57,9 @@ const updateMenuItemByIdController = (req, res) => __awaiter(void 0, void 0, voi
 exports.updateMenuItemByIdController = updateMenuItemByIdController;
 const deleteMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const deletedmenuItem = (0, menuItem_query_1.deleteMenuItem)(id);
-        res.json(menuItem_query_1.deleteMenuItem);
+        res.json(deletedmenuItem);
     }
     catch (error) {
         res.status(500).json({ error: error.message });

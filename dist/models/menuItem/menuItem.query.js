@@ -22,17 +22,17 @@ const getAllMenuItem = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getAllMenuItem = getAllMenuItem;
 const getMenuItemById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const singleMenuItem = menuItem_model_1.menuItemModel.findOne({ _id: id });
+    const singleMenuItem = menuItem_model_1.menuItemModel.findOne({ "item.itemId": id });
     return singleMenuItem;
 });
 exports.getMenuItemById = getMenuItemById;
 const updateMenuItemById = (id, menuItemObject) => __awaiter(void 0, void 0, void 0, function* () {
-    const updatedMenuItewm = yield menuItem_model_1.menuItemModel.findByIdAndUpdate({ _id: id }, { $set: menuItemObject }, { new: true });
+    const updatedMenuItewm = yield menuItem_model_1.menuItemModel.findOneAndUpdate({ "item.itemId": id }, Object.assign({}, menuItemObject), { new: true });
     return updatedMenuItewm;
 });
 exports.updateMenuItemById = updateMenuItemById;
 const deleteMenuItem = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const removeMenuItem = yield menuItem_model_1.menuItemModel.findByIdAndDelete({ _id: id });
+    const removeMenuItem = yield menuItem_model_1.menuItemModel.findOneAndDelete({ "item.itemId": id });
     return removeMenuItem;
 });
 exports.deleteMenuItem = deleteMenuItem;

@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const category_controller_1 = require("../controllers/category.controller");
 const router = express_1.default.Router();
 router.get('/', category_controller_1.getAllCategoriesController);
+router.get('/findOne/:id', category_controller_1.getcategoryByUsingCategoryIdController);
 router.get('/:id', category_controller_1.getCategoriesByIdController);
 router.post('/create', category_controller_1.createCategoryController);
 router.put('/edit/:id', category_controller_1.updateCategoryByIdController);

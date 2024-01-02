@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMealTimeController = exports.updateMealTimeController = exports.getMealTimeByIdController = exports.getAllMealTimeController = exports.createMealTimeController = void 0;
+exports.getMealTimeByUsingIdController = exports.deleteMealTimeController = exports.updateMealTimeController = exports.getMealTimeByIdController = exports.getAllMealTimeController = exports.createMealTimeController = void 0;
 const mealTime_query_1 = require("../models/mealTime/mealTime.query");
 const createMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -32,9 +32,10 @@ const getAllMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.getAllMealTimeController = getAllMealTimeController;
+//Find All items under the mealTIme Schedule
 const getMealTimeByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const mealTime = yield (0, mealTime_query_1.getMealTimeById)(id);
         res.status(200).json(mealTime);
     }
@@ -43,12 +44,22 @@ const getMealTimeByIdController = (req, res) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.getMealTimeByIdController = getMealTimeByIdController;
+// export const updateMealTimeController = async(req: Request, res: Response)=>{
+//     try {
+//         const id: number =Number(req.params.id);
+//         const menuTimeObject = {...req.body}
+//         const updatedmemuTime = updateMealTimeById(id,menuTimeObject );
+//         res.status(200).json(updatedmemuTime)
+//     } catch (error: any) {
+//         res.status(500).json({error: error.message});
+//     }
+// }
 const updateMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const mealTimeObject = Object.assign({}, req.body);
         const updatedmealTime = yield (0, mealTime_query_1.updateMealTimeById)(id, mealTimeObject);
-        res.json(updatedmealTime);
+        res.status(200).json(updatedmealTime);
     }
     catch (error) {
         res.status(500).json({ error: error.message });
@@ -57,7 +68,7 @@ const updateMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0,
 exports.updateMealTimeController = updateMealTimeController;
 const deleteMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = req.params.id;
+        const id = Number(req.params.id);
         const deletedmealTime = yield (0, mealTime_query_1.deleteMealTime)(id);
         res.json(deletedmealTime);
     }
@@ -66,3 +77,15 @@ const deleteMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.deleteMealTimeController = deleteMealTimeController;
+//Find MealtimeBy Using id
+const getMealTimeByUsingIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = Number(req.params.id);
+        const mealtime = yield (0, mealTime_query_1.getMealTimeByUsingId)(id);
+        res.status(200).json(mealtime);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+exports.getMealTimeByUsingIdController = getMealTimeByUsingIdController;

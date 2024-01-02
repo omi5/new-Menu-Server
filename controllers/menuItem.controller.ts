@@ -23,7 +23,7 @@ export const getAllMenuItemController = async(req: Request, res:Response)=>{
 
 export const getMenuItemByIdController = async(req: Request, res: Response)=>{
     try {
-        const id = req.params.id;
+        const id: number = Number(req.params.id);
         const oneMenuItem = await getMenuItemById(id);
         res.status(200).json(oneMenuItem);
     } catch (error: any) {
@@ -33,7 +33,7 @@ export const getMenuItemByIdController = async(req: Request, res: Response)=>{
 
 export const updateMenuItemByIdController = async(req: Request, res: Response)=>{
     try {
-        const id = req.params.id;
+        const id: number =Number(req.params.id);
         const menuItemObject = {...req.body}
         const updatedmemuItem = updateMenuItemById(id, menuItemObject);
         res.status(200).json(updatedmemuItem)
@@ -45,9 +45,9 @@ export const updateMenuItemByIdController = async(req: Request, res: Response)=>
 
 export const deleteMenuItemController = async(req: Request, res: Response)=>{
     try {
-        const id = req.params.id;
+        const id: number =Number(req.params.id);
         const deletedmenuItem = deleteMenuItem(id);
-        res.json(deleteMenuItem);
+        res.json(deletedmenuItem);
     } catch (error: any) {
         res.status(500).json({error: error.message});
         
