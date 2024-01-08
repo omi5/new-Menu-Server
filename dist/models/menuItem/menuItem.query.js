@@ -9,13 +9,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMenuItem = exports.updateMenuItemById = exports.getMenuItemById = exports.getAllMenuItem = exports.createMenuItem = void 0;
+exports.getAllMenuItemByRestaurantId = exports.deleteMenuItem = exports.updateMenuItemById = exports.getMenuItemById = exports.getAllMenuItem = exports.createMenuItem = void 0;
 const menuItem_model_1 = require("./menuItem.model");
 const createMenuItem = (menuItemObject) => __awaiter(void 0, void 0, void 0, function* () {
     const newMealItem = yield menuItem_model_1.menuItemModel.create(Object.assign({}, menuItemObject));
     return newMealItem;
 });
 exports.createMenuItem = createMenuItem;
+const getAllMenuItemByRestaurantId = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const findAllItemsUnderRestaurant = yield menuItem_model_1.menuItemModel.aggregate([
+        {
+            $match: {
+                restaurantId: id
+            },
+        },
+        {
+            $lookup: {
+                from: 'menuitems',
+                localField: 'restaurantId',
+                foreignField: 'restaurantId',
+                as: 'listOfItems'
+            },
+        },
+    ]);
+    return findAllItemsUnderRestaurant;
+});
+exports.getAllMenuItemByRestaurantId = getAllMenuItemByRestaurantId;
 const getAllMenuItem = () => __awaiter(void 0, void 0, void 0, function* () {
     const allMenuItem = menuItem_model_1.menuItemModel.find();
     return allMenuItem;

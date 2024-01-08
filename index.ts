@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import categoryRouter from './routers/category.route';
 import mealTimeRouter from './routers/mealtime.route';
 import menuItemRouter from './routers/menuItem.route';
+import recipeRouter from './routers/recipe.route'
+import loginData from './routers/login.route'
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
@@ -13,6 +15,8 @@ app.use(express.json());
 app.use('/category', categoryRouter);
 app.use('/mealtime', mealTimeRouter);
 app.use('/menuItem', menuItemRouter);
+app.use('/recipe', recipeRouter);
+app.use('/login',loginData);
 
 
 (async function connectDB(){

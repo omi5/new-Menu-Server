@@ -4,14 +4,14 @@ import { getNextSequenceValue } from '../../utils/nextSequnece';
 
 
 
-const ItemDietaryRestrictions= new Schema<ItemDietaryRestrictionsInterface>({
-    allergens: String
-})
-const packaging = new Schema<PackagingInterface>({
-    dimensionLength: Number,
-    dimensionWidth: Number,
-    dimensionHeight: Number,
-})
+// const ItemDietaryRestrictions= new Schema<ItemDietaryRestrictionsInterface>({
+//     allergens: String
+// })
+// const packaging = new Schema<PackagingInterface>({
+//     dimensionLength: Number,
+//     dimensionWidth: Number,
+//     dimensionHeight: Number,
+// })
 
 const ingredients = new Schema<IngredientsInterface>({
         id: Number,
@@ -47,10 +47,11 @@ const itemSchema = new Schema<ItemInterface>({
 	itemPortionsize: Number,
 	itemPreparationtime: Number,
 	itemLastingTime: Number,
+    typeOfFoods: String,
     itemPackingType: String,
 	servingTemperature: Number,
-	itemDietaryRestrictions: [ItemDietaryRestrictions],
-    itemPackingDimention: packaging,
+	itemDietaryRestrictions: [],
+    // itemPackingDimention: packaging,
     ingredients: [ingredients],
     options: { add : [addOption] , no: [noOption]}
 
@@ -62,13 +63,13 @@ const menuItemSchema = new Schema({
     restaurantId : Number,
     categoryId: Number,
     mealTimeId: Number,
-    item: [itemSchema],
+    item: itemSchema,
         
 })
 
 
 
-// Middleware to auto-increment tableId
+// Middleware to auto-increment ItemId
 itemSchema.pre('save', async function (next) {
     const doc = this;
     if (!doc.itemId) {

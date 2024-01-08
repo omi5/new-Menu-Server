@@ -5,7 +5,7 @@ export interface PackagingInterface {
 }
 
 export interface IngredientsInterface {
-    id: number,
+    id: number, //raw item
     restaurantId: number,
 	ingredientName: string,
 	unitOfStock: string,
@@ -13,6 +13,8 @@ export interface IngredientsInterface {
 	costPerUnit: number,
     unitOfPrice: string;
 	caloriesPerUnit: number
+
+    //menuItem
 }
 
 export interface AddOptionInterface {
@@ -41,6 +43,7 @@ export interface ItemInterface {
 	itemCalories: number,
 	timeOfDay: [string, string, string],
     itemProfileTastyTags: string[],
+    typeOfFoods: string,
 	itemPortionsize: number,
 	itemPreparationtime: number,
 	itemLastingTime: number,

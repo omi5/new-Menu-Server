@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,deleteMenuItem } from "../models/menuItem/menuItem.query";
+import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,deleteMenuItem,getAllMenuItemByRestaurantId } from "../models/menuItem/menuItem.query";
 
 
 export const createMenuItemController = async(req: Request, res: Response)=>{
@@ -52,4 +52,17 @@ export const deleteMenuItemController = async(req: Request, res: Response)=>{
         res.status(500).json({error: error.message});
         
     }
+}
+
+
+export const getAllMenuItemByRestaurantIdController = async(req: Request, res: Response)=>{
+    try {
+        const id: number = Number(req.params.id);
+        const mealItems = await getAllMenuItemByRestaurantId(id);
+        res.status(200).json(mealItems);
+    } catch (error: any) {
+        res.status(500).json({error: error.message});
+        
+    }      
+
 }

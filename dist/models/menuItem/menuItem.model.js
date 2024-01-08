@@ -12,14 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.menuItemModel = void 0;
 const mongoose_1 = require("mongoose");
 const nextSequnece_1 = require("../../utils/nextSequnece");
-const ItemDietaryRestrictions = new mongoose_1.Schema({
-    allergens: String
-});
-const packaging = new mongoose_1.Schema({
-    dimensionLength: Number,
-    dimensionWidth: Number,
-    dimensionHeight: Number,
-});
+// const ItemDietaryRestrictions= new Schema<ItemDietaryRestrictionsInterface>({
+//     allergens: String
+// })
+// const packaging = new Schema<PackagingInterface>({
+//     dimensionLength: Number,
+//     dimensionWidth: Number,
+//     dimensionHeight: Number,
+// })
 const ingredients = new mongoose_1.Schema({
     id: Number,
     restaurantId: Number,
@@ -51,10 +51,11 @@ const itemSchema = new mongoose_1.Schema({
     itemPortionsize: Number,
     itemPreparationtime: Number,
     itemLastingTime: Number,
+    typeOfFoods: String,
     itemPackingType: String,
     servingTemperature: Number,
-    itemDietaryRestrictions: [ItemDietaryRestrictions],
-    itemPackingDimention: packaging,
+    itemDietaryRestrictions: [],
+    // itemPackingDimention: packaging,
     ingredients: [ingredients],
     options: { add: [addOption], no: [noOption] }
 });
@@ -62,7 +63,7 @@ const menuItemSchema = new mongoose_1.Schema({
     restaurantId: Number,
     categoryId: Number,
     mealTimeId: Number,
-    item: [itemSchema],
+    item: itemSchema,
 });
 // Middleware to auto-increment tableId
 itemSchema.pre('save', function (next) {

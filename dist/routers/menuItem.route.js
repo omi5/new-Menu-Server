@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const menuItem_controller_1 = require("../controllers/menuItem.controller");
 const router = express_1.default.Router();
 router.get('/', menuItem_controller_1.getAllMenuItemController);
+router.get('/restaurant/:id', menuItem_controller_1.getAllMenuItemByRestaurantIdController);
 router.get('/:id', menuItem_controller_1.getMenuItemByIdController);
 router.post('/create', menuItem_controller_1.createMenuItemController);
 router.put('/edit/:id', menuItem_controller_1.updateMenuItemByIdController);

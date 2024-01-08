@@ -1,5 +1,4 @@
 
-
 export interface categoryInterface{
     restaurantId?: number,
     categoryId: number,

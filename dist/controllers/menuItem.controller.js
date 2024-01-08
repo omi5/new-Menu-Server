@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMenuItemController = exports.updateMenuItemByIdController = exports.getMenuItemByIdController = exports.getAllMenuItemController = exports.createMenuItemController = void 0;
+exports.getAllMenuItemByRestaurantIdController = exports.deleteMenuItemController = exports.updateMenuItemByIdController = exports.getMenuItemByIdController = exports.getAllMenuItemController = exports.createMenuItemController = void 0;
 const menuItem_query_1 = require("../models/menuItem/menuItem.query");
 const createMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -66,3 +66,14 @@ const deleteMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.deleteMenuItemController = deleteMenuItemController;
+const getAllMenuItemByRestaurantIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = Number(req.params.id);
+        const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(id);
+        res.status(200).json(mealItems);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+exports.getAllMenuItemByRestaurantIdController = getAllMenuItemByRestaurantIdController;

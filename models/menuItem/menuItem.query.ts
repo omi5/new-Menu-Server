@@ -7,6 +7,26 @@ const createMenuItem = async(menuItemObject: ItemInterface)=>{
     return newMealItem;
 }
 
+const getAllMenuItemByRestaurantId = async(id: number)=>{
+    const findAllItemsUnderRestaurant = await menuItemModel.aggregate([
+        {
+            $match: {
+                restaurantId: id 
+            },
+          },
+          {
+            $lookup: {
+              from: 'menuitems',
+              localField: 'restaurantId',
+              foreignField: 'restaurantId',
+              as: 'listOfItems'
+            },
+          },
+    ])
+
+    return findAllItemsUnderRestaurant;
+}
+
 const getAllMenuItem = async()=>{
     const allMenuItem = menuItemModel.find();
     return allMenuItem;
@@ -38,7 +58,8 @@ export{
     getAllMenuItem,
     getMenuItemById,
     updateMenuItemById,
-    deleteMenuItem
+    deleteMenuItem,
+    getAllMenuItemByRestaurantId
     
 }
 
