@@ -44,7 +44,7 @@ const itemSchema = new Schema<ItemInterface>({
 	itemCalories: Number,
 	timeOfDay: [String, String, String],
     itemProfileTastyTags: [],
-	itemPortionsize: Number,
+	itemPortionsize: String,
 	itemPreparationtime: Number,
 	itemLastingTime: Number,
     typeOfFoods: String,

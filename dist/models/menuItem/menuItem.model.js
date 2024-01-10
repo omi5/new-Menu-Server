@@ -48,7 +48,7 @@ const itemSchema = new mongoose_1.Schema({
     itemCalories: Number,
     timeOfDay: [String, String, String],
     itemProfileTastyTags: [],
-    itemPortionsize: Number,
+    itemPortionsize: String,
     itemPreparationtime: Number,
     itemLastingTime: Number,
     typeOfFoods: String,
@@ -65,7 +65,7 @@ const menuItemSchema = new mongoose_1.Schema({
     mealTimeId: Number,
     item: itemSchema,
 });
-// Middleware to auto-increment tableId
+// Middleware to auto-increment ItemId
 itemSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         const doc = this;

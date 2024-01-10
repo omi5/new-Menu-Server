@@ -48,7 +48,7 @@ export const deleteRecipeController = async (req: Request, res: Response)=>{
     try {
         const id = Number(req.params.id)
         const deletedRecipe =await deleteRecipe(id);
-        res.status(200).json(deleteRecipe);
+        res.status(200).json(deletedRecipe);
     } catch (error : any) {
         res.status(500).json({error: error.message});
         

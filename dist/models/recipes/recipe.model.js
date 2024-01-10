@@ -9,27 +9,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mealTimeModel = void 0;
+exports.recipeModel = void 0;
 const mongoose_1 = require("mongoose");
 const nextSequnece_1 = require("../../utils/nextSequnece");
-const mealTimeSchema = new mongoose_1.Schema({
-    restaurantId: { type: Number },
-    mealTimeId: { type: Number },
-    mealTimeName: { type: String, required: true },
-    startDay: { type: String },
-    endDay: { type: String },
-    description: { type: String, required: true },
-    startTime: { type: String, required: true },
-    endTime: { type: String, required: true }
+const ingredients = new mongoose_1.Schema({
+    id: Number,
+    restaurantId: Number,
+    ingredientName: String,
+    unitOfStock: String,
+    quantity: Number,
+    costPerUnit: Number,
+    caloriesPerUnit: Number
 });
-// Middleware to auto-increment tableId
-mealTimeSchema.pre('save', function (next) {
+const recipeItemSchema = new mongoose_1.Schema({
+    restaurantId: Number,
+    categoryId: Number,
+    recipeId: { type: Number },
+    recipeName: String,
+    recipeItemPortionSize: String,
+    recipeItemPreparationTime: Number,
+    recipeItemCost: Number,
+    recipeItemCalories: Number,
+    recipeItemDescription: String,
+    ingredients: [ingredients]
+});
+// Middleware to auto-increment recipeId
+recipeItemSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         const doc = this;
-        if (!doc.mealTimeId) {
-            doc.mealTimeId = yield (0, nextSequnece_1.getNextSequenceValue)('mealTimeCounter');
+        if (!doc.recipeId) {
+            doc.recipeId = yield (0, nextSequnece_1.getNextSequenceValue)('recipeItemCounter');
         }
         next();
     });
 });
-exports.mealTimeModel = (0, mongoose_1.model)('mealTimes', mealTimeSchema);
+exports.recipeModel = (0, mongoose_1.model)('recipes', recipeItemSchema);

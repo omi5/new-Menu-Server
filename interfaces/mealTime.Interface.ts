@@ -3,8 +3,8 @@ export interface mealTimeInterface {
     restaurantId? : number,
     mealTimeId: number,
     mealTimeName: string,
-    startDay?: number,
-    endDay?:number,
+    startDay?: string,
+    endDay?:string,
     description: string,
     startTime: string,
     endTime: string

@@ -2,8 +2,9 @@ import { recipeInterface } from "../../interfaces/recipe.interface";
 import { recipeModel } from "./recipe.model";
 
 
-const createRecipe = async(recipeObject: recipeInterface)=>{
+const createRecipe = async(recipeObject: any)=>{
     const newRecipe = await recipeModel.create({...recipeObject})
+    return newRecipe;
 }
 
 const getAllRecipeByRestaurantId = async(id: number)=>{
@@ -38,7 +39,7 @@ const getRecipeById = async (id: number)=>{
 
 const updateRecipeById = async(id: number, menuItemObject: recipeInterface)=>{
     const updatedMenuItewm = await recipeModel.findOneAndUpdate(
-        {"item.itemId": id},
+        {"recipeId": id},
         { ...menuItemObject},
         {new: true}
     );

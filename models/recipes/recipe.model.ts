@@ -16,7 +16,7 @@ const ingredients = new Schema<IngredientsInterface>({
 const recipeItemSchema = new Schema({
     restaurantId: Number,
     categoryId: Number,
-    recipeId: Number,
+    recipeId: {type: Number},
     recipeName: String,
     recipeItemPortionSize: String,
     recipeItemPreparationTime: Number,
@@ -31,7 +31,7 @@ const recipeItemSchema = new Schema({
 recipeItemSchema.pre('save', async function (next) {
     const doc = this;
     if (!doc.recipeId) {
-        doc.recipeId = await getNextSequenceValue('menuItemCounter');
+        doc.recipeId = await getNextSequenceValue('recipeItemCounter');
     }
     next();
 });

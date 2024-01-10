@@ -7,8 +7,8 @@ const mealTimeSchema = new Schema<mealTimeInterface>({
     restaurantId: {type: Number},
     mealTimeId: {type: Number},
     mealTimeName : {type: String, required: true},
-    startDay: {type: Number, min: 0 , max: 6},
-    endDay: {type: Number, min: 0 , max: 6},
+    startDay: {type: String},
+    endDay: {type: String},
     description: {type: String, required: true},
     startTime: {type: String, required: true},
     endTime: {type: String, required: true}

@@ -44,7 +44,7 @@ export interface ItemInterface {
 	timeOfDay: [string, string, string],
     itemProfileTastyTags: string[],
     typeOfFoods: string,
-	itemPortionsize: number,
+	itemPortionsize: string,
 	itemPreparationtime: number,
 	itemLastingTime: number,
     itemPackingType: number,
