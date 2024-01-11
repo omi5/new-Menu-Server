@@ -20,7 +20,7 @@ app.use('/login',loginData);
 
 
 (async function connectDB(){
-    await mongoose.connect('mongodb://localhost:27017/menuBuilder1');
+    await mongoose.connect('mongodb://localhost:27017/menuBuilder');
     console.log('Connected to DB');
 
     app.listen(port, ()=>{

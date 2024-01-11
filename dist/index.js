@@ -31,7 +31,7 @@ app.use('/recipe', recipe_route_1.default);
 app.use('/login', login_route_1.default);
 (function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect('mongodb://localhost:27017/menuBuilder1');
+        yield mongoose_1.default.connect('mongodb://localhost:27017/menuBuilder');
         console.log('Connected to DB');
         app.listen(port, () => {
             console.log(`Server is listening at http://127.0.0.1:${port}`);

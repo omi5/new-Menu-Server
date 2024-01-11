@@ -62,6 +62,7 @@ const itemSchema = new mongoose_1.Schema({
 const menuItemSchema = new mongoose_1.Schema({
     restaurantId: Number,
     categoryId: Number,
+    categoryName: String,
     mealTimeId: Number,
     item: itemSchema,
 });
