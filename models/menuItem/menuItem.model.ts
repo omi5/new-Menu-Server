@@ -61,7 +61,7 @@ const itemSchema = new Schema<ItemInterface>({
 
 const menuItemSchema = new Schema({
     restaurantId : Number,
-    categoryId: Number,
+    categoryId: String,
     categoryName: String,
     mealTimeId: Number,
     item: itemSchema,

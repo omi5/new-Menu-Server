@@ -1,7 +1,7 @@
 
 export interface categoryInterface{
     restaurantId?: number,
-    categoryId: number,
+    categoryId: string,
     categoryName: string,
     categoryDescription: string,
     categoryImage?: string
