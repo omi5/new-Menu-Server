@@ -41,17 +41,17 @@ const getAllRecipe = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getAllRecipe = getAllRecipe;
 const getRecipeById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const singleMenuItem = recipe_model_1.recipeModel.findOne({ "recipeId": id });
+    const singleMenuItem = recipe_model_1.recipeModel.findOne({ _id: id });
     return singleMenuItem;
 });
 exports.getRecipeById = getRecipeById;
 const updateRecipeById = (id, menuItemObject) => __awaiter(void 0, void 0, void 0, function* () {
-    const updatedMenuItewm = yield recipe_model_1.recipeModel.findOneAndUpdate({ "recipeId": id }, Object.assign({}, menuItemObject), { new: true });
+    const updatedMenuItewm = yield recipe_model_1.recipeModel.findOneAndUpdate({ _id: id }, Object.assign({}, menuItemObject), { new: true });
     return updatedMenuItewm;
 });
 exports.updateRecipeById = updateRecipeById;
 const deleteRecipe = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const removeMenuItem = yield recipe_model_1.recipeModel.findOneAndDelete({ "recipeId": id });
+    const removeMenuItem = yield recipe_model_1.recipeModel.findOneAndDelete({ _id: id });
     return removeMenuItem;
 });
 exports.deleteRecipe = deleteRecipe;

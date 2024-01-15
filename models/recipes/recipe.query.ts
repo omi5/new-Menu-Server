@@ -32,22 +32,22 @@ const getAllRecipe = async()=>{
     return allMenuItem;
 }
 
-const getRecipeById = async (id: number)=>{
-    const singleMenuItem =  recipeModel.findOne({"recipeId" : id})
+const getRecipeById = async (id: string)=>{
+    const singleMenuItem =  recipeModel.findOne({_id : id})
     return singleMenuItem;
 }
 
-const updateRecipeById = async(id: number, menuItemObject: recipeInterface)=>{
+const updateRecipeById = async(id: string, menuItemObject: recipeInterface)=>{
     const updatedMenuItewm = await recipeModel.findOneAndUpdate(
-        {"recipeId": id},
+        {_id: id},
         { ...menuItemObject},
         {new: true}
     );
 
     return updatedMenuItewm;
 }
-const deleteRecipe = async(id: number)=>{
-    const removeMenuItem = await recipeModel.findOneAndDelete({"recipeId": id})
+const deleteRecipe = async(id: string)=>{
+    const removeMenuItem = await recipeModel.findOneAndDelete({_id: id})
     return removeMenuItem;
 }
 

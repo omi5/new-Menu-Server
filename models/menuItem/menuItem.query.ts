@@ -32,14 +32,14 @@ const getAllMenuItem = async()=>{
     return allMenuItem;
 }
 
-const getMenuItemById = async (id: number)=>{
-    const singleMenuItem =  menuItemModel.findOne({"item.itemId" : id})
+const getMenuItemById = async (id: string)=>{
+    const singleMenuItem =  menuItemModel.findOne({_id : id})
     return singleMenuItem;
 }
 
-const updateMenuItemById = async(id: number, menuItemObject: ItemInterface)=>{
+const updateMenuItemById = async(id: string, menuItemObject: ItemInterface)=>{
     const updatedMenuItewm = await menuItemModel.findOneAndUpdate(
-        {"item.itemId": id},
+        {_id: id},
         { ...menuItemObject},
         {new: true}
     );
@@ -47,8 +47,8 @@ const updateMenuItemById = async(id: number, menuItemObject: ItemInterface)=>{
     return updatedMenuItewm;
 }
 
-const deleteMenuItem = async(id: number)=>{
-    const removeMenuItem = await menuItemModel.findOneAndDelete({"item.itemId": id})
+const deleteMenuItem = async(id: string)=>{
+    const removeMenuItem = await menuItemModel.findOneAndDelete({_id: id})
     return removeMenuItem;
 }
 

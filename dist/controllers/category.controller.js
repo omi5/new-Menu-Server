@@ -47,7 +47,7 @@ const getCategoriesByIdController = (req, res) => __awaiter(void 0, void 0, void
 exports.getCategoriesByIdController = getCategoriesByIdController;
 const updateCategoryByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const categoryObject = Object.assign({}, req.body);
         const updatedCategory = yield (0, category_query_1.updateCategoryById)(id, categoryObject);
         res.json(updatedCategory);
@@ -59,7 +59,7 @@ const updateCategoryByIdController = (req, res) => __awaiter(void 0, void 0, voi
 exports.updateCategoryByIdController = updateCategoryByIdController;
 const deleteCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const deletedCategory = yield (0, category_query_1.deleteCategory)(id);
         res.json(deletedCategory);
     }
@@ -71,7 +71,7 @@ exports.deleteCategoryController = deleteCategoryController;
 //Find All categories
 const getcategoryByUsingCategoryIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const category = yield (0, category_query_1.getcategoryByUsingCategoryId)(id);
         res.status(200).json(category);
     }

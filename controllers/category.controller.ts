@@ -35,7 +35,7 @@ export const getCategoriesByIdController = async(req: Request, res: Response)=>{
 
 export const updateCategoryByIdController = async(req: Request, res: Response)=>{
     try {
-        const id: number =Number(req.params.id);
+        const id =req.params.id;
         const categoryObject = {... req.body};
         const updatedCategory = await updateCategoryById(id, categoryObject);
         res.json(updatedCategory);
@@ -46,7 +46,7 @@ export const updateCategoryByIdController = async(req: Request, res: Response)=>
 
 export const deleteCategoryController = async(req: Request , res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
+        const id: string =  req.params.id;
         const deletedCategory = await deleteCategory(id)
         res.json(deletedCategory) 
     } catch (error: any) {
@@ -58,7 +58,7 @@ export const deleteCategoryController = async(req: Request , res: Response)=>{
 
 export const getcategoryByUsingCategoryIdController = async(req: Request, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
+        const id: string = req.params.id;
         const category = await getcategoryByUsingCategoryId(id);
         res.status(200).json(category)
     } catch (error: any) {

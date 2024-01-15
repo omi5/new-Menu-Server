@@ -24,7 +24,7 @@ export const getAllRecipeController =async (req: Request, res: Response) => {
 
 export const getRecipeByIdController = async(req: Request, res:Response)=>{
     try {
-        const id =Number(req.params.id);
+        const id:string =req.params.id ;
         const oneRecipe = await getRecipeById(id);
         res.status(200).json(oneRecipe);
     } catch (error:any) {
@@ -34,7 +34,7 @@ export const getRecipeByIdController = async(req: Request, res:Response)=>{
 
 export const updateRecipeByIdController = async(req: Request, res: Response)=>{
     try {
-        const id = Number(req.params.id);
+        const id: string =  req.params.id;
         const objectOfRecipe = {...req.body}
         const updatedRecipe = await updateRecipeById(id, objectOfRecipe);
         res.status(200).json(updatedRecipe)
@@ -46,7 +46,7 @@ export const updateRecipeByIdController = async(req: Request, res: Response)=>{
 
 export const deleteRecipeController = async (req: Request, res: Response)=>{
     try {
-        const id = Number(req.params.id)
+        const id:string = req.params.id;
         const deletedRecipe =await deleteRecipe(id);
         res.status(200).json(deletedRecipe);
     } catch (error : any) {

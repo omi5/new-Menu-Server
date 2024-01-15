@@ -22,7 +22,7 @@ const getAllCategories = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getAllCategories = getAllCategories;
 const getcategoryByUsingCategoryId = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const category = yield category_model_1.categoryModel.findOne({ categoryId: id });
+    const category = yield category_model_1.categoryModel.findOne({ _id: id });
     return category;
 });
 exports.getcategoryByUsingCategoryId = getcategoryByUsingCategoryId;
@@ -48,12 +48,12 @@ const getCategoriesById = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getCategoriesById = getCategoriesById;
 const updateCategoryById = (id, categoryObject) => __awaiter(void 0, void 0, void 0, function* () {
-    const updateCategory = yield category_model_1.categoryModel.find({ categoryId: id }, Object.assign({}, categoryObject), { new: true });
+    const updateCategory = yield category_model_1.categoryModel.findByIdAndUpdate({ _id: id }, Object.assign({}, categoryObject), { new: true });
     return updateCategory;
 });
 exports.updateCategoryById = updateCategoryById;
 const deleteCategory = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const removeCategory = yield category_model_1.categoryModel.findOneAndDelete({ categoryId: id });
+    const removeCategory = yield category_model_1.categoryModel.findOneAndDelete({ _id: id });
     return removeCategory;
 });
 exports.deleteCategory = deleteCategory;

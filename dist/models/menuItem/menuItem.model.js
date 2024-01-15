@@ -29,15 +29,25 @@ const ingredients = new mongoose_1.Schema({
     costPerUnit: Number,
     caloriesPerUnit: Number
 });
-const addOption = new mongoose_1.Schema({
+const addons = new mongoose_1.Schema({
+    id: Number,
+    restaurantId: Number,
     ingredientName: String,
+    unitOfStock: String,
     quantity: Number,
-    ingredients: [ingredients]
+    costPerUnit: Number,
+    caloriesPerUnit: Number,
+    price: String
+});
+const addOption = new mongoose_1.Schema({
+    // ingredientName: String,
+    // quantity: Number,
+    ingredients: addons
 });
 const noOption = new mongoose_1.Schema({
-    ingredientName: String,
-    quantity: Number,
-    ingredients: [ingredients]
+    // ingredientName: String,
+    // quantity: Number,
+    ingredients: addons
 });
 const itemSchema = new mongoose_1.Schema({
     itemId: { type: Number },
@@ -57,7 +67,7 @@ const itemSchema = new mongoose_1.Schema({
     itemDietaryRestrictions: [],
     // itemPackingDimention: packaging,
     ingredients: [ingredients],
-    options: { add: [addOption], no: [noOption] }
+    options: { add: [addons], no: [addons] }
 });
 const menuItemSchema = new mongoose_1.Schema({
     restaurantId: Number,

@@ -11,8 +11,8 @@ const getAllCategories = async()=>{
     return categories;
 }
 
-const getcategoryByUsingCategoryId = async(id:number)=>{
-    const category =await categoryModel.findOne({categoryId : id});
+const getcategoryByUsingCategoryId = async(id:string)=>{
+    const category =await categoryModel.findOne({_id : id});
     return category;
 }
 //find filter category items using category ID
@@ -36,13 +36,13 @@ const getCategoriesById = async(id: number)=>{
     return category;
 }
 
-const updateCategoryById = async(id: number, categoryObject: categoryInterface)=>{
-    const updateCategory = await categoryModel.find({categoryId: id},{ ...categoryObject},{new: true});
+const updateCategoryById = async(id: string, categoryObject: categoryInterface)=>{
+    const updateCategory = await categoryModel.findByIdAndUpdate({_id: id},{ ...categoryObject},{new: true});
     return updateCategory;
 }
 
-const deleteCategory = async(id: number)=>{
-    const removeCategory = await categoryModel.findOneAndDelete({categoryId: id});
+const deleteCategory = async(id: string)=>{
+    const removeCategory = await categoryModel.findOneAndDelete({_id: id});
     return removeCategory;
 }
 

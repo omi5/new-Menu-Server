@@ -24,7 +24,7 @@ export const getAllMealTimeController = async(req: Request, res: Response)=>{
 //Find All items under the mealTIme Schedule
 export const getMealTimeByIdController = async(req: Request, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
+        const id: string = req.params.id;
         const mealTime = await getMealTimeById(id);
         res.status(200).json(mealTime);
     } catch (error: any) {
@@ -48,7 +48,7 @@ export const getMealTimeByIdController = async(req: Request, res: Response)=>{
 
 export const updateMealTimeController = async( req: Request, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
+        const id: string = req.params.id;
         const mealTimeObject = {...req.body};
         const updatedmealTime = await updateMealTimeById(id, mealTimeObject);
         res.status(200).json(updatedmealTime);
@@ -59,7 +59,7 @@ export const updateMealTimeController = async( req: Request, res: Response)=>{
 
 export const deleteMealTimeController = async( req: Request, res: Response)=>{
     try {
-        const id: number =Number(req.params.id);
+        const id: string = req.params.id;
         const deletedmealTime = await deleteMealTime(id);
         res.json(deletedmealTime)
     } catch (error: any) {
@@ -71,7 +71,7 @@ export const deleteMealTimeController = async( req: Request, res: Response)=>{
 
 export const getMealTimeByUsingIdController = async(req: Request, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
+        const id: string = req.params.id;
         const mealtime = await getMealTimeByUsingId(id);
         res.status(200).json(mealtime);
 

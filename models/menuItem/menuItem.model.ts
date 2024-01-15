@@ -1,5 +1,5 @@
 import  { Schema,model } from "mongoose";
-import { AddOptionInterface,NoOptionInterface,IngredientsInterface,PackagingInterface,ItemDietaryRestrictionsInterface,ItemInterface } from "../../interfaces/mealItem.interface";
+import { AddOptionInterface,NoOptionInterface,IngredientsInterface,PackagingInterface,ItemDietaryRestrictionsInterface,ItemInterface, AddonsIngredinetsInterface } from "../../interfaces/mealItem.interface";
 import { getNextSequenceValue } from '../../utils/nextSequnece';
 
 
@@ -22,16 +22,26 @@ const ingredients = new Schema<IngredientsInterface>({
 		costPerUnit: Number,
 		caloriesPerUnit: Number
 })
-const addOption = new Schema<AddOptionInterface>({
+const addons = new Schema<AddonsIngredinetsInterface>({
+    id: Number,
+    restaurantId: Number,
     ingredientName: String,
+    unitOfStock: String,
     quantity: Number,
-    ingredients: [ingredients]
+    costPerUnit: Number,
+    caloriesPerUnit: Number,
+    price: String
+})
+const addOption = new Schema<AddOptionInterface>({
+    // ingredientName: String,
+    // quantity: Number,
+    ingredients: addons
 })
 
 const noOption = new Schema<NoOptionInterface>({
-    ingredientName: String,
-    quantity: Number,
-    ingredients: [ingredients]
+    // ingredientName: String,
+    // quantity: Number,
+    ingredients: addons
 })
 
 
@@ -53,7 +63,7 @@ const itemSchema = new Schema<ItemInterface>({
 	itemDietaryRestrictions: [],
     // itemPackingDimention: packaging,
     ingredients: [ingredients],
-    options: { add : [addOption] , no: [noOption]}
+    options: { add : [addons] , no: [addons]}
 
 })
 

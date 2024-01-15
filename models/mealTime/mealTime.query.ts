@@ -14,7 +14,7 @@ const getAllMealTime = async ()=>{
 
 
 //Find All items under this MealTime Schedule 
-const getMealTimeById = async (id: number)=>{
+const getMealTimeById = async (id: string)=>{
     // const findOneMealTime = await mealTimeModel.findOne({_id: id}); should also find by mealTimeId
     // return findOneMealTime;
 
@@ -37,20 +37,20 @@ const getMealTimeById = async (id: number)=>{
     return  findAllItemsUnderThisMealTime;
 }
 
-const updateMealTimeById = async (id: number, menuTimeObject: mealTimeInterface)=>{
+const updateMealTimeById = async (id: string, menuTimeObject: mealTimeInterface)=>{
    //In here also try of update by  using mealtimeId 
     const updateMealTime = await mealTimeModel.findOneAndUpdate( {mealTimeId: id},{ ...menuTimeObject},{new: true});
     return updateMealTime;
 }
 
-const deleteMealTime =  async (id: number)=>{
+const deleteMealTime =  async (id: string)=>{
     const removeMealTime = await mealTimeModel.findOneAndDelete({mealTimeId: id}) //In here we also  use mealTime id in the future 
     return removeMealTime;
 }
 
 //Find Mealtime By Using The ID
 
-const getMealTimeByUsingId = async(id: number)=>{
+const getMealTimeByUsingId = async(id: string)=>{
      const findOneMealTime = await mealTimeModel.findOne({mealTimeId: id}); //should also find by mealTimeId
     return findOneMealTime;
 }

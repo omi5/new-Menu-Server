@@ -5,6 +5,8 @@ import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,delete
 export const createMenuItemController = async(req: Request, res: Response)=>{
     try {
         const objectOfMenuItem = {... req.body};
+        console.log('objectOfMenuItem======',objectOfMenuItem);
+        
         const menuItem = await createMenuItem(objectOfMenuItem);
         res.status(201).json(menuItem);
     } catch (error: any) {
@@ -23,7 +25,7 @@ export const getAllMenuItemController = async(req: Request, res:Response)=>{
 
 export const getMenuItemByIdController = async(req: Request, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
+        const id: string = req.params.id;
         const oneMenuItem = await getMenuItemById(id);
         res.status(200).json(oneMenuItem);
     } catch (error: any) {
@@ -33,7 +35,7 @@ export const getMenuItemByIdController = async(req: Request, res: Response)=>{
 
 export const updateMenuItemByIdController = async(req: Request, res: Response)=>{
     try {
-        const id: number =Number(req.params.id);
+        const id: string = req.params.id;
         const menuItemObject = {...req.body}
         const updatedmemuItem = updateMenuItemById(id, menuItemObject);
         res.status(200).json(updatedmemuItem)
@@ -45,7 +47,7 @@ export const updateMenuItemByIdController = async(req: Request, res: Response)=>
 
 export const deleteMenuItemController = async(req: Request, res: Response)=>{
     try {
-        const id: number =Number(req.params.id);
+        const id: string = req.params.id;
         const deletedmenuItem = deleteMenuItem(id);
         res.json(deletedmenuItem);
     } catch (error: any) {

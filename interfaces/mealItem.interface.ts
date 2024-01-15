@@ -16,16 +16,19 @@ export interface IngredientsInterface {
 
     //menuItem
 }
-
+export type AddonsIngredinetsInterface = IngredientsInterface & {
+    price: string,
+    
+}
 export interface AddOptionInterface {
-    ingredientName: string,
-    quantity?: number,
+    // ingredientName: string,
+    // quantity?: number,
     ingredients: IngredientsInterface[]
 }
 
 export interface NoOptionInterface {
-    ingredientName: string,
-    quantity?: number,
+    // ingredientName: string,
+    // quantity?: number,
     ingredients: IngredientsInterface[]
 }
 

@@ -35,7 +35,7 @@ exports.getAllMealTimeController = getAllMealTimeController;
 //Find All items under the mealTIme Schedule
 const getMealTimeByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const mealTime = yield (0, mealTime_query_1.getMealTimeById)(id);
         res.status(200).json(mealTime);
     }
@@ -56,7 +56,7 @@ exports.getMealTimeByIdController = getMealTimeByIdController;
 // }
 const updateMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const mealTimeObject = Object.assign({}, req.body);
         const updatedmealTime = yield (0, mealTime_query_1.updateMealTimeById)(id, mealTimeObject);
         res.status(200).json(updatedmealTime);
@@ -68,7 +68,7 @@ const updateMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0,
 exports.updateMealTimeController = updateMealTimeController;
 const deleteMealTimeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const deletedmealTime = yield (0, mealTime_query_1.deleteMealTime)(id);
         res.json(deletedmealTime);
     }
@@ -80,7 +80,7 @@ exports.deleteMealTimeController = deleteMealTimeController;
 //Find MealtimeBy Using id
 const getMealTimeByUsingIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const mealtime = yield (0, mealTime_query_1.getMealTimeByUsingId)(id);
         res.status(200).json(mealtime);
     }

@@ -34,7 +34,7 @@ const getAllRecipeController = (req, res) => __awaiter(void 0, void 0, void 0, f
 exports.getAllRecipeController = getAllRecipeController;
 const getRecipeByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const oneRecipe = yield (0, recipe_query_1.getRecipeById)(id);
         res.status(200).json(oneRecipe);
     }
@@ -45,7 +45,7 @@ const getRecipeByIdController = (req, res) => __awaiter(void 0, void 0, void 0, 
 exports.getRecipeByIdController = getRecipeByIdController;
 const updateRecipeByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const objectOfRecipe = Object.assign({}, req.body);
         const updatedRecipe = yield (0, recipe_query_1.updateRecipeById)(id, objectOfRecipe);
         res.status(200).json(updatedRecipe);
@@ -57,7 +57,7 @@ const updateRecipeByIdController = (req, res) => __awaiter(void 0, void 0, void 
 exports.updateRecipeByIdController = updateRecipeByIdController;
 const deleteRecipeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = req.params.id;
         const deletedRecipe = yield (0, recipe_query_1.deleteRecipe)(id);
         res.status(200).json(deletedRecipe);
     }
