@@ -45,18 +45,18 @@ const getMealTimeById = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getMealTimeById = getMealTimeById;
 const updateMealTimeById = (id, menuTimeObject) => __awaiter(void 0, void 0, void 0, function* () {
     //In here also try of update by  using mealtimeId 
-    const updateMealTime = yield mealTime_model_1.mealTimeModel.findOneAndUpdate({ mealTimeId: id }, Object.assign({}, menuTimeObject), { new: true });
+    const updateMealTime = yield mealTime_model_1.mealTimeModel.findOneAndUpdate({ _id: id }, Object.assign({}, menuTimeObject), { new: true });
     return updateMealTime;
 });
 exports.updateMealTimeById = updateMealTimeById;
 const deleteMealTime = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const removeMealTime = yield mealTime_model_1.mealTimeModel.findOneAndDelete({ mealTimeId: id }); //In here we also  use mealTime id in the future 
+    const removeMealTime = yield mealTime_model_1.mealTimeModel.findOneAndDelete({ _id: id }); //In here we also  use mealTime id in the future 
     return removeMealTime;
 });
 exports.deleteMealTime = deleteMealTime;
 //Find Mealtime By Using The ID
 const getMealTimeByUsingId = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const findOneMealTime = yield mealTime_model_1.mealTimeModel.findOne({ mealTimeId: id }); //should also find by mealTimeId
+    const findOneMealTime = yield mealTime_model_1.mealTimeModel.findOne({ _id: id }); //should also find by mealTimeId
     return findOneMealTime;
 });
 exports.getMealTimeByUsingId = getMealTimeByUsingId;
