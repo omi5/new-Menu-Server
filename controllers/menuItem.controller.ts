@@ -5,7 +5,7 @@ import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,delete
 export const createMenuItemController = async(req: Request, res: Response)=>{
     try {
         const objectOfMenuItem = {... req.body};
-        console.log('objectOfMenuItem======',objectOfMenuItem);
+        // console.log('objectOfMenuItem======',objectOfMenuItem);
         
         const menuItem = await createMenuItem(objectOfMenuItem);
         res.status(201).json(menuItem);

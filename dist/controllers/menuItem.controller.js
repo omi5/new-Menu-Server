@@ -14,7 +14,7 @@ const menuItem_query_1 = require("../models/menuItem/menuItem.query");
 const createMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const objectOfMenuItem = Object.assign({}, req.body);
-        console.log('objectOfMenuItem======', objectOfMenuItem);
+        // console.log('objectOfMenuItem======',objectOfMenuItem);
         const menuItem = yield (0, menuItem_query_1.createMenuItem)(objectOfMenuItem);
         res.status(201).json(menuItem);
     }
