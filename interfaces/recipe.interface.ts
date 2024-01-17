@@ -15,7 +15,7 @@ export interface recipeInterface{
     categoryId: number,
     recipeId: number,
     recipeName: string,
-    recipeItemPortionSize: string,
+    recipeItemPortionSize: number,
     recipeItemPreparationTime: number,
     recipeItemCost: number,
     recipeItemCalories: number,

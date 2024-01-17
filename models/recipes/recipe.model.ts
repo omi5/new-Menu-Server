@@ -18,7 +18,7 @@ const recipeItemSchema = new Schema({
     categoryId: Number,
     recipeId: {type: Number},
     recipeName: String,
-    recipeItemPortionSize: String,
+    recipeItemPortionSize: Number,
     recipeItemPreparationTime: Number,
     recipeItemCost: Number,
     recipeItemCalories: Number,
