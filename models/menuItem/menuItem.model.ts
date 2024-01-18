@@ -44,6 +44,18 @@ const noOption = new Schema<NoOptionInterface>({
     ingredients: addons
 })
 
+const recipeItemSchema = new Schema({
+    restaurantId: Number,
+    categoryId: Number,
+    recipeId: {type: Number},
+    recipeName: String,
+    recipeItemPortionSize: Number,
+    recipeItemPreparationTime: Number,
+    recipeItemCost: Number,
+    recipeItemCalories: Number,
+    recipeItemDescription: String,
+    ingredients: [ingredients]
+})
 
 const itemSchema = new Schema<ItemInterface>({
     itemId: {type: Number},
@@ -62,7 +74,11 @@ const itemSchema = new Schema<ItemInterface>({
 	servingTemperature: Number,
 	itemDietaryRestrictions: [],
     // itemPackingDimention: packaging,
-    ingredients: [ingredients],
+    ingredients: {
+        rawIngredients: [ingredients],
+        recipes: [recipeItemSchema]
+
+    },
     options: { add : [addons] , no: [addons]}
 
 })

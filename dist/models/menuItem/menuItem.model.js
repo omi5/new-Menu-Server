@@ -49,6 +49,18 @@ const noOption = new mongoose_1.Schema({
     // quantity: Number,
     ingredients: addons
 });
+const recipeItemSchema = new mongoose_1.Schema({
+    restaurantId: Number,
+    categoryId: Number,
+    recipeId: { type: Number },
+    recipeName: String,
+    recipeItemPortionSize: Number,
+    recipeItemPreparationTime: Number,
+    recipeItemCost: Number,
+    recipeItemCalories: Number,
+    recipeItemDescription: String,
+    ingredients: [ingredients]
+});
 const itemSchema = new mongoose_1.Schema({
     itemId: { type: Number },
     itemName: String,
@@ -66,7 +78,10 @@ const itemSchema = new mongoose_1.Schema({
     servingTemperature: Number,
     itemDietaryRestrictions: [],
     // itemPackingDimention: packaging,
-    ingredients: [ingredients],
+    ingredients: {
+        rawIngredients: [ingredients],
+        recipes: [recipeItemSchema]
+    },
     options: { add: [addons], no: [addons] }
 });
 const menuItemSchema = new mongoose_1.Schema({

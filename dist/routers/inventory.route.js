@@ -24,7 +24,7 @@ router.get("/getAll", (req, res) => __awaiter(void 0, void 0, void 0, function* 
             id: ingredient.id,
             ingredientName: ingredient.ingredientName,
             unitOfStock: ingredient.unitOfStock,
-            costPerUnit: ingredient.costPerUnit * 100,
+            costPerUnit: ingredient.costPerUnit,
             caloriesPerUnit: ingredient.caloriesPerUnit,
             liquid: ingredient.liquid,
         }));

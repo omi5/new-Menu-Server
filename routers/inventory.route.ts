@@ -15,7 +15,7 @@ router.get("/getAll", async (req: Request, res: Response) => {
       id: ingredient.id,
       ingredientName: ingredient.ingredientName,
       unitOfStock: ingredient.unitOfStock,
-      costPerUnit: ingredient.costPerUnit * 100, 
+      costPerUnit: ingredient.costPerUnit , 
       caloriesPerUnit: ingredient.caloriesPerUnit,
       liquid: ingredient.liquid,
     }));
