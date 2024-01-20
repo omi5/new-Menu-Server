@@ -34,5 +34,32 @@ console.log(selectedData);
    
   }
 });
+router.get("/getAllPacking", async (req: Request, res: Response) => {
+  try {
+   
+    const externalServerUrl = "https://inventory-server-klzl.onrender.com/v1/deliveryBox/restaurant/1"; 
+    // const externalServerUrl = "https://equal-monarch-early.ngrok-free.app/v1/ingredient/restaurant/1";
+
+    const response = await axios.get(externalServerUrl);
+    const externalData = response.data;
+   
+    
+    const selectedData = externalData.deliveryBoxes.map((deliveryBox: any) => ({
+      id: deliveryBox.id,
+      boxName: deliveryBox.ingredientName,
+      // unitOfStock: ingredient.unitOfStock,
+      // costPerUnit: ingredient.costPerUnit , 
+      // caloriesPerUnit: ingredient.caloriesPerUnit,
+      // liquid: ingredient.liquid,
+    }));
+console.log(selectedData);
+
+    res.send( selectedData);
+  } catch (error: any) {
+
+    console.error("Error fetching data:", error.message);
+   
+  }
+});
 
 export default  router;
