@@ -17,22 +17,23 @@ const createMenuItem = (menuItemObject) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.createMenuItem = createMenuItem;
 const getAllMenuItemByRestaurantId = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const findAllItemsUnderRestaurant = yield menuItem_model_1.menuItemModel.aggregate([
-        {
-            $match: {
-                restaurantId: id
-            },
-        },
-        {
-            $lookup: {
-                from: 'menuitems',
-                localField: 'restaurantId',
-                foreignField: 'restaurantId',
-                as: 'listOfItems'
-            },
-        },
-    ]);
-    return findAllItemsUnderRestaurant;
+    // const findAllItemsUnderRestaurant = await menuItemModel.aggregate([
+    //     {
+    //         $match: {
+    //             restaurantId: id 
+    //         },
+    //       },
+    //       {
+    //         $lookup: {
+    //           from: 'menuitems',
+    //           localField: 'restaurantId',
+    //           foreignField: 'restaurantId',
+    //           as: 'listOfItems'
+    //         },
+    //       },
+    // ])
+    const listOfMenuItems = yield menuItem_model_1.menuItemModel.find({ restaurantId: id });
+    return listOfMenuItems;
 });
 exports.getAllMenuItemByRestaurantId = getAllMenuItemByRestaurantId;
 const getAllMenuItem = () => __awaiter(void 0, void 0, void 0, function* () {

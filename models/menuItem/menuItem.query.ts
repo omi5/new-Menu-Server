@@ -8,23 +8,24 @@ const createMenuItem = async(menuItemObject: ItemInterface)=>{
 }
 
 const getAllMenuItemByRestaurantId = async(id: number)=>{
-    const findAllItemsUnderRestaurant = await menuItemModel.aggregate([
-        {
-            $match: {
-                restaurantId: id 
-            },
-          },
-          {
-            $lookup: {
-              from: 'menuitems',
-              localField: 'restaurantId',
-              foreignField: 'restaurantId',
-              as: 'listOfItems'
-            },
-          },
-    ])
+    // const findAllItemsUnderRestaurant = await menuItemModel.aggregate([
+    //     {
+    //         $match: {
+    //             restaurantId: id 
+    //         },
+    //       },
+    //       {
+    //         $lookup: {
+    //           from: 'menuitems',
+    //           localField: 'restaurantId',
+    //           foreignField: 'restaurantId',
+    //           as: 'listOfItems'
+    //         },
+    //       },
+    // ])
+    const listOfMenuItems=await menuItemModel.find({restaurantId : id})
 
-    return findAllItemsUnderRestaurant;
+    return listOfMenuItems;
 }
 
 const getAllMenuItem = async()=>{
