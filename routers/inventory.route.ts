@@ -46,11 +46,22 @@ router.get("/getAllPacking", async (req: Request, res: Response) => {
     
     const selectedData = externalData.deliveryBoxes.map((deliveryBox: any) => ({
       id: deliveryBox.id,
-      boxName: deliveryBox.ingredientName,
-      // unitOfStock: ingredient.unitOfStock,
-      // costPerUnit: ingredient.costPerUnit , 
-      // caloriesPerUnit: ingredient.caloriesPerUnit,
-      // liquid: ingredient.liquid,
+      boxName: deliveryBox.boxName,
+      currentStockQuantity: deliveryBox.currentStockQuantity,
+      unitOfPrice: deliveryBox.unitOfPrice,
+      costPerUnit: deliveryBox.costPerUnit,
+      reorderPoint: deliveryBox.reorderPoint,
+      unitOfDimentions: deliveryBox.unitOfDimentions,
+      dimensions: deliveryBox.dimensions,
+      weightLimit: deliveryBox.weightLimit,
+      temperatureLimit: deliveryBox.temperatureLimit,
+      waterproof: deliveryBox.waterproof,
+      expectedStockForToday: deliveryBox.expectedStockForToday,
+      expectedStockForTomorrow: deliveryBox.expectedStockForTomorrow,
+      restaurantId: deliveryBox.restaurantId,
+      createdAt: deliveryBox.createdAt,
+      updatedAt: deliveryBox.updatedAt
+
     }));
 console.log(selectedData);
 

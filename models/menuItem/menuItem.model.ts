@@ -30,7 +30,7 @@ const addons = new Schema<AddonsIngredinetsInterface>({
     quantity: Number,
     costPerUnit: Number,
     caloriesPerUnit: Number,
-    price: String
+    price: Number
 })
 const addOption = new Schema<AddOptionInterface>({
     // ingredientName: String,
@@ -66,8 +66,8 @@ const itemSchema = new Schema<ItemInterface>({
 	itemCalories: Number,
 	timeOfDay: [String, String, String],
     itemProfileTastyTags: [],
-	itemPortionsize: String,
-	itemPreparationtime: Number,
+	itemPortionSize: String,
+	itemPreparationTime: Number,
 	itemLastingTime: Number,
     typeOfFoods: [],
     itemPackingType: [],

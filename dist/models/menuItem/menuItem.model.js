@@ -37,7 +37,7 @@ const addons = new mongoose_1.Schema({
     quantity: Number,
     costPerUnit: Number,
     caloriesPerUnit: Number,
-    price: String
+    price: Number
 });
 const addOption = new mongoose_1.Schema({
     // ingredientName: String,
@@ -70,8 +70,8 @@ const itemSchema = new mongoose_1.Schema({
     itemCalories: Number,
     timeOfDay: [String, String, String],
     itemProfileTastyTags: [],
-    itemPortionsize: String,
-    itemPreparationtime: Number,
+    itemPortionSize: String,
+    itemPreparationTime: Number,
     itemLastingTime: Number,
     typeOfFoods: [],
     itemPackingType: [],

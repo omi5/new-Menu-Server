@@ -39,4 +39,35 @@ router.get("/getAll", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.error("Error fetching data:", error.message);
     }
 }));
+router.get("/getAllPacking", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const externalServerUrl = "https://inventory-server-klzl.onrender.com/v1/deliveryBox/restaurant/1";
+        // const externalServerUrl = "https://equal-monarch-early.ngrok-free.app/v1/ingredient/restaurant/1";
+        const response = yield axios_1.default.get(externalServerUrl);
+        const externalData = response.data;
+        const selectedData = externalData.deliveryBoxes.map((deliveryBox) => ({
+            id: deliveryBox.id,
+            boxName: deliveryBox.boxName,
+            currentStockQuantity: deliveryBox.currentStockQuantity,
+            unitOfPrice: deliveryBox.unitOfPrice,
+            costPerUnit: deliveryBox.costPerUnit,
+            reorderPoint: deliveryBox.reorderPoint,
+            unitOfDimentions: deliveryBox.unitOfDimentions,
+            dimensions: deliveryBox.dimensions,
+            weightLimit: deliveryBox.weightLimit,
+            temperatureLimit: deliveryBox.temperatureLimit,
+            waterproof: deliveryBox.waterproof,
+            expectedStockForToday: deliveryBox.expectedStockForToday,
+            expectedStockForTomorrow: deliveryBox.expectedStockForTomorrow,
+            restaurantId: deliveryBox.restaurantId,
+            createdAt: deliveryBox.createdAt,
+            updatedAt: deliveryBox.updatedAt
+        }));
+        console.log(selectedData);
+        res.send(selectedData);
+    }
+    catch (error) {
+        console.error("Error fetching data:", error.message);
+    }
+}));
 exports.default = router;
