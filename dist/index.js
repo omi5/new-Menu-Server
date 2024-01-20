@@ -25,6 +25,7 @@ const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
+const dbUrl = 'mongodb+srv://mamunomi24:aftermath@projectcode.hvi77c8.mongodb.net/?retryWrites=true&w=majority';
 app.use('/category', category_route_1.default);
 app.use('/mealtime', mealtime_route_1.default);
 app.use('/menuItem', menuItem_route_1.default);
@@ -33,7 +34,7 @@ app.use('/login', login_route_1.default);
 app.use('/inventory', inventory_route_1.default);
 (function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield mongoose_1.default.connect('mongodb://localhost:27017/menuBuilder');
+        yield mongoose_1.default.connect(dbUrl);
         console.log('Connected to DB');
         app.listen(port, () => {
             console.log(`Server is listening at http://127.0.0.1:${port}`);

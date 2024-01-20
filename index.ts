@@ -13,6 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const dbUrl = 'mongodb+srv://mamunomi24:aftermath@projectcode.hvi77c8.mongodb.net/?retryWrites=true&w=majority'
 
 app.use('/category', categoryRouter);
 app.use('/mealtime', mealTimeRouter);
@@ -21,9 +22,8 @@ app.use('/recipe', recipeRouter);
 app.use('/login',loginData);
 app.use('/inventory',inventoryRouter);
 
-
 (async function connectDB(){
-    await mongoose.connect('mongodb://localhost:27017/menuBuilder');
+    await mongoose.connect(dbUrl);
     console.log('Connected to DB');
 
     app.listen(port, ()=>{

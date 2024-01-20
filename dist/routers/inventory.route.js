@@ -15,9 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const axios_1 = __importDefault(require("axios"));
+const cors = require('cors');
+const app = (0, express_1.default)();
+app.use(cors());
 router.get("/getAll", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const externalServerUrl = "https://equal-monarch-early.ngrok-free.app/v1/ingredient/restaurant/1";
+        const externalServerUrl = "https://inventory-server-klzl.onrender.com/v1/ingredient/restaurant/1";
+        // const externalServerUrl = "https://equal-monarch-early.ngrok-free.app/v1/ingredient/restaurant/1";
         const response = yield axios_1.default.get(externalServerUrl);
         const externalData = response.data;
         const selectedData = externalData.ingredients.map((ingredient) => ({
