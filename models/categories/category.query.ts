@@ -46,12 +46,20 @@ const deleteCategory = async(id: string)=>{
     return removeCategory;
 }
 
+
+const getAllCategoryByRestaurantId = async(id: number)=>{
+
+    const listOfCategory= await categoryModel.find({restaurantId : id})
+    return listOfCategory;
+}
+
 export {
     createCategory,
     getAllCategories,
     getCategoriesById,
     updateCategoryById,
     deleteCategory,
-    getcategoryByUsingCategoryId
+    getcategoryByUsingCategoryId,
+    getAllCategoryByRestaurantId
     
 }

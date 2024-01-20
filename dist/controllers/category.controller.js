@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getcategoryByUsingCategoryIdController = exports.deleteCategoryController = exports.updateCategoryByIdController = exports.getCategoriesByIdController = exports.getAllCategoriesController = exports.createCategoryController = void 0;
+exports.getAllCategoryByRestaurantIdController = exports.getcategoryByUsingCategoryIdController = exports.deleteCategoryController = exports.updateCategoryByIdController = exports.getCategoriesByIdController = exports.getAllCategoriesController = exports.createCategoryController = void 0;
 const category_query_1 = require("../models/categories/category.query");
 const createCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -80,3 +80,14 @@ const getcategoryByUsingCategoryIdController = (req, res) => __awaiter(void 0, v
     }
 });
 exports.getcategoryByUsingCategoryIdController = getcategoryByUsingCategoryIdController;
+const getAllCategoryByRestaurantIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = Number(req.params.id);
+        const category = yield (0, category_query_1.getAllCategoryByRestaurantId)(id);
+        res.status(200).json(category);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+exports.getAllCategoryByRestaurantIdController = getAllCategoryByRestaurantIdController;

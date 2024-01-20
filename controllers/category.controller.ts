@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {createCategory,getAllCategories,getCategoriesById,updateCategoryById,deleteCategory, getcategoryByUsingCategoryId } from '../models/categories/category.query'
+import {getAllCategoryByRestaurantId,createCategory,getAllCategories,getCategoriesById,updateCategoryById,deleteCategory, getcategoryByUsingCategoryId } from '../models/categories/category.query'
 
 
 export const createCategoryController = async(req: Request, res: Response)=>{
@@ -60,6 +60,18 @@ export const getcategoryByUsingCategoryIdController = async(req: Request, res: R
     try {
         const id: string = req.params.id;
         const category = await getcategoryByUsingCategoryId(id);
+        res.status(200).json(category)
+    } catch (error: any) {
+        res.status(500).json({error: error.message});
+    }
+}
+
+
+
+export const getAllCategoryByRestaurantIdController = async(req: Request, res: Response)=>{
+    try {
+        const id: number = Number(req.params.id);
+        const category = await getAllCategoryByRestaurantId(id);
         res.status(200).json(category)
     } catch (error: any) {
         res.status(500).json({error: error.message});
