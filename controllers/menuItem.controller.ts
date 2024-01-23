@@ -37,8 +37,13 @@ export const updateMenuItemByIdController = async(req: Request, res: Response)=>
     try {
         const id: string = req.params.id;
         const menuItemObject = {...req.body}
-        const updatedmemuItem = updateMenuItemById(id, menuItemObject);
-        res.status(200).json(updatedmemuItem)
+    
+        
+        const updatedmemuItem = await updateMenuItemById(id, menuItemObject);
+        console.log("updated item ====",updatedmemuItem);
+        
+        
+        res.status(200).send(updatedmemuItem)
     } catch (error: any) {
         res.status(500).json({error: error.message});
         

@@ -38,13 +38,14 @@ const getMenuItemById = async (id: string)=>{
     return singleMenuItem;
 }
 
-const updateMenuItemById = async(id: string, menuItemObject: ItemInterface)=>{
+const updateMenuItemById = async(id: string, menuItemObject: any)=>{
     const updatedMenuItewm = await menuItemModel.findOneAndUpdate(
         {_id: id},
         { ...menuItemObject},
         {new: true}
     );
-
+    console.log('coming from bacend menu ====',updatedMenuItewm);
+    
     return updatedMenuItewm;
 }
 

@@ -48,8 +48,9 @@ const updateMenuItemByIdController = (req, res) => __awaiter(void 0, void 0, voi
     try {
         const id = req.params.id;
         const menuItemObject = Object.assign({}, req.body);
-        const updatedmemuItem = (0, menuItem_query_1.updateMenuItemById)(id, menuItemObject);
-        res.status(200).json(updatedmemuItem);
+        const updatedmemuItem = yield (0, menuItem_query_1.updateMenuItemById)(id, menuItemObject);
+        console.log("updated item ====", updatedmemuItem);
+        res.status(200).send(updatedmemuItem);
     }
     catch (error) {
         res.status(500).json({ error: error.message });

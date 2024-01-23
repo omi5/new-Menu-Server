@@ -12,7 +12,7 @@ export interface IngredientsInterface {
 
 export interface recipeInterface{
     restaurantId?: number,
-    categoryId: number,
+    categoryId: string,
     recipeId: number,
     recipeName: string,
     recipeItemPortionSize: number,

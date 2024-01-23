@@ -48,6 +48,7 @@ const getMenuItemById = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getMenuItemById = getMenuItemById;
 const updateMenuItemById = (id, menuItemObject) => __awaiter(void 0, void 0, void 0, function* () {
     const updatedMenuItewm = yield menuItem_model_1.menuItemModel.findOneAndUpdate({ _id: id }, Object.assign({}, menuItemObject), { new: true });
+    console.log('coming from bacend menu ====', updatedMenuItewm);
     return updatedMenuItewm;
 });
 exports.updateMenuItemById = updateMenuItemById;

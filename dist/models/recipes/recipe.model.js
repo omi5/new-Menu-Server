@@ -23,7 +23,7 @@ const ingredients = new mongoose_1.Schema({
 });
 const recipeItemSchema = new mongoose_1.Schema({
     restaurantId: Number,
-    categoryId: Number,
+    categoryId: String,
     recipeId: { type: Number },
     recipeName: String,
     recipeItemPortionSize: Number,

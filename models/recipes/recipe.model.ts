@@ -15,7 +15,7 @@ const ingredients = new Schema<IngredientsInterface>({
 
 const recipeItemSchema = new Schema({
     restaurantId: Number,
-    categoryId: Number,
+    categoryId: String,
     recipeId: {type: Number},
     recipeName: String,
     recipeItemPortionSize: Number,
