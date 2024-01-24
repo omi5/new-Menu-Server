@@ -21,6 +21,7 @@ const menuItem_route_1 = __importDefault(require("./routers/menuItem.route"));
 const recipe_route_1 = __importDefault(require("./routers/recipe.route"));
 const login_route_1 = __importDefault(require("./routers/login.route"));
 const inventory_route_1 = __importDefault(require("./routers/inventory.route"));
+const auth_route_1 = __importDefault(require("./routers/auth.route"));
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -32,6 +33,7 @@ app.use('/menuItem', menuItem_route_1.default);
 app.use('/recipe', recipe_route_1.default);
 app.use('/login', login_route_1.default);
 app.use('/inventory', inventory_route_1.default);
+app.use('/auth', auth_route_1.default);
 (function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
         yield mongoose_1.default.connect(dbUrl);

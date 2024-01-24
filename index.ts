@@ -7,6 +7,7 @@ import menuItemRouter from './routers/menuItem.route';
 import recipeRouter from './routers/recipe.route'
 import loginData from './routers/login.route'
 import inventoryRouter from './routers/inventory.route'
+import authRouter from './routers/auth.route';
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -21,6 +22,7 @@ app.use('/menuItem', menuItemRouter);
 app.use('/recipe', recipeRouter);
 app.use('/login',loginData);
 app.use('/inventory',inventoryRouter);
+app.use('/auth',authRouter);
 
 (async function connectDB(){
     await mongoose.connect(dbUrl);
