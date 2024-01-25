@@ -11,7 +11,7 @@ import authRouter from './routers/auth.route';
 
 const port = process.env.PORT || 3000;
 const app = express();
-app.use(cors());
+app.use(cors({exposedHeaders: ['Authorization']}));
 app.use(express.json());
 
 const dbUrl = 'mongodb+srv://mamunomi24:aftermath@projectcode.hvi77c8.mongodb.net/?retryWrites=true&w=majority'

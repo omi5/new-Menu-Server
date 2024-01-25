@@ -42,6 +42,7 @@ router.get("/getAll",authMiddleware, async (req: AuthRequest, res: Response) => 
   try {
     const user = req.user;
     const token = req.token;
+    console.log('user and token',user,token)
     if (!user || !token) return res.status(401).send({ message: 'Unauthorized.' });
     const restaurantId = user.employeeInformation.restaurantId;
 

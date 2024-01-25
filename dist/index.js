@@ -24,7 +24,7 @@ const inventory_route_1 = __importDefault(require("./routers/inventory.route"));
 const auth_route_1 = __importDefault(require("./routers/auth.route"));
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ exposedHeaders: ['Authorization'] }));
 app.use(express_1.default.json());
 const dbUrl = 'mongodb+srv://mamunomi24:aftermath@projectcode.hvi77c8.mongodb.net/?retryWrites=true&w=majority';
 app.use('/category', category_route_1.default);
