@@ -26,9 +26,9 @@ export async function getUserFromToken (token: string) {
 // const menuUrl = 'https://bento-menu-omi5.koyeb.app/menuItem/restaurant/1'
 
 
-export async function getIngredientFromInventory(token: string) {
+export async function getIngredientFromInventory(token: string,restaurantId: number) {
     try {
-      const res = await axios.get<any>(config.SKELETON_URL + 'inventory/ingredients/restaurantId ', { headers: { 'Authorization': token }});
+      const res = await axios.get<any>(config.SKELETON_URL + 'inventory/ingredients/${restaurantId}', { headers: { 'Authorization': token }});
       return res.data;
     } catch (error) {
       console.log(error);
@@ -36,9 +36,9 @@ export async function getIngredientFromInventory(token: string) {
     }
   }
 
-  export async function getDeliveryBoxFromInventory(token: string) {
+  export async function getDeliveryBoxFromInventory(token: string,restaurantId: number) {
     try {
-      const res = await axios.get<any>(config.SKELETON_URL + 'inventory/delivery-box/restaurantId ', { headers: { 'Authorization': token }});
+      const res = await axios.get<any>(config.SKELETON_URL + 'inventory/delivery-box/${restaurantId}', { headers: { 'Authorization': token }});
       return res.data;
     } catch (error) {
       console.log(error);
