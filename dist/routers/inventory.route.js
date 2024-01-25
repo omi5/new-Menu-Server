@@ -45,9 +45,9 @@ router.get("/getAll", auth_middleware_1.authMiddleware, (req, res) => __awaiter(
         if (!user || !token)
             return res.status(401).send({ message: 'Unauthorized.' });
         const restaurantId = user.employeeInformation.restaurantId;
-        const menu = yield (0, skeleton_service_1.getIngredientFromInventory)(token, restaurantId);
+        const ingredient = yield (0, skeleton_service_1.getIngredientFromInventory)(token, restaurantId);
         // const menu = await getMenuFromMenuBuilder();
-        res.send(menu);
+        res.send(ingredient);
     }
     catch (error) {
         res.status(500);
