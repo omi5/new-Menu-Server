@@ -28,7 +28,7 @@ export async function getUserFromToken (token: string) {
 
 export async function getIngredientFromInventory(token: string,restaurantId: number) {
     try {
-      const res = await axios.get<any>(config.SKELETON_URL + 'inventory/ingredients/${restaurantId}', { headers: { 'Authorization': token }});
+      const res = await axios.get<any>(config.SKELETON_URL + `inventory/ingredients/${restaurantId}`, { headers: { 'Authorization': token }});
       return res.data;
     } catch (error) {
       console.log(error);
@@ -38,7 +38,7 @@ export async function getIngredientFromInventory(token: string,restaurantId: num
 
   export async function getDeliveryBoxFromInventory(token: string,restaurantId: number) {
     try {
-      const res = await axios.get<any>(config.SKELETON_URL + 'inventory/delivery-box/${restaurantId}', { headers: { 'Authorization': token }});
+      const res = await axios.get<any>(config.SKELETON_URL + `inventory/delivery-box/${restaurantId}`, { headers: { 'Authorization': token }});
       return res.data;
     } catch (error) {
       console.log(error);
