@@ -77,7 +77,7 @@ const itemSchema = new Schema<ItemInterface>({
     ingredients: {
         rawIngredients: [ingredients],
         recipes: [recipeItemSchema]
-
+ 
     },
     options: { add : [addons] , no: [addons]}
 
