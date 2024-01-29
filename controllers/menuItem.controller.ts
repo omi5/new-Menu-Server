@@ -4,8 +4,17 @@ import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,delete
 
 export const createMenuItemController = async(req: Request, res: Response)=>{
     try {
-        const objectOfMenuItem = {... req.body};
+        const objectOfMenuItem = req.body;
+        // if(objectOfMenuItem.Array)
         // console.log('objectOfMenuItem======',objectOfMenuItem);
+        let menuItems: any[]=[]
+        if (Array.isArray(objectOfMenuItem)){
+            objectOfMenuItem.map(async(item)=>{
+                const menuItem = await createMenuItem(item)
+                menuItems.push(menuItem)
+            })
+            res.status(201).json(menuItems);
+        }
         
         const menuItem = await createMenuItem(objectOfMenuItem);
         res.status(201).json(menuItem);

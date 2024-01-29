@@ -13,8 +13,17 @@ exports.getAllMenuItemByRestaurantIdController = exports.deleteMenuItemControlle
 const menuItem_query_1 = require("../models/menuItem/menuItem.query");
 const createMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const objectOfMenuItem = Object.assign({}, req.body);
+        const objectOfMenuItem = req.body;
+        // if(objectOfMenuItem.Array)
         // console.log('objectOfMenuItem======',objectOfMenuItem);
+        let menuItems = [];
+        if (Array.isArray(objectOfMenuItem)) {
+            objectOfMenuItem.map((item) => __awaiter(void 0, void 0, void 0, function* () {
+                const menuItem = yield (0, menuItem_query_1.createMenuItem)(item);
+                menuItems.push(menuItem);
+            }));
+            res.status(201).json(menuItems);
+        }
         const menuItem = yield (0, menuItem_query_1.createMenuItem)(objectOfMenuItem);
         res.status(201).json(menuItem);
     }
