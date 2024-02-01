@@ -1,10 +1,18 @@
 import { Request, Response } from "express";
 import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,deleteMenuItem,getAllMenuItemByRestaurantId } from "../models/menuItem/menuItem.query";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
 
-export const createMenuItemController = async(req: Request, res: Response)=>{
+export const createMenuItemController = async(req: AuthRequest, res: Response)=>{
     try {
         const objectOfMenuItem = req.body;
+        const resId = req.user?.employeeInformation.restaurantId
+        if (resId) {
+            objectOfMenuItem.restaurantId = resId;
+          } else {
+            // Handle the case when restaurantId is not available
+            console.error("Restaurant ID is not available.");
+          }
         // if(objectOfMenuItem.Array)
         // console.log('objectOfMenuItem======',objectOfMenuItem);
         let menuItems: any[]=[]

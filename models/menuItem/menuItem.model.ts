@@ -2,17 +2,6 @@ import  { Schema,model } from "mongoose";
 import { AddOptionInterface,NoOptionInterface,IngredientsInterface,PackagingInterface,ItemDietaryRestrictionsInterface,ItemInterface, AddonsIngredinetsInterface } from "../../interfaces/mealItem.interface";
 import { getNextSequenceValue } from '../../utils/nextSequnece';
 
-
-
-// const ItemDietaryRestrictions= new Schema<ItemDietaryRestrictionsInterface>({
-//     allergens: String
-// })
-// const packaging = new Schema<PackagingInterface>({
-//     dimensionLength: Number,
-//     dimensionWidth: Number,
-//     dimensionHeight: Number,
-// })
-
 const ingredients = new Schema<IngredientsInterface>({
         id: Number,
         restaurantId: Number,
@@ -33,14 +22,10 @@ const addons = new Schema<AddonsIngredinetsInterface>({
     price: Number
 })
 const addOption = new Schema<AddOptionInterface>({
-    // ingredientName: String,
-    // quantity: Number,
     ingredients: addons
 })
 
 const noOption = new Schema<NoOptionInterface>({
-    // ingredientName: String,
-    // quantity: Number,
     ingredients: addons
 })
 
