@@ -1,10 +1,18 @@
 import { Request, Response } from "express";
 import {getAllCategoryByRestaurantId,createCategory,getAllCategories,getCategoriesById,updateCategoryById,deleteCategory, getcategoryByUsingCategoryId } from '../models/categories/category.query'
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
 
-export const createCategoryController = async(req: Request, res: Response)=>{
+export const createCategoryController = async(req: AuthRequest, res: Response)=>{
     try {
         const objectOfCategory = {...req.body};
+        const resId = req.user?.employeeInformation.restaurantId
+        if (resId) {
+            objectOfCategory.restaurantId = resId;
+          } else {
+            // Handle the case when restaurantId is not available
+            console.error("Restaurant ID is not available.");
+          }
         const category = await createCategory(objectOfCategory);
         res.status(201).json(category)
     } catch (error) {
@@ -68,10 +76,12 @@ export const getcategoryByUsingCategoryIdController = async(req: Request, res: R
 
 
 
-export const getAllCategoryByRestaurantIdController = async(req: Request, res: Response)=>{
+export const getAllCategoryByRestaurantIdController = async(req: AuthRequest, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
-        const category = await getAllCategoryByRestaurantId(id);
+        // const id: number = Number(req.params.id);
+        const resId: number = Number(req.user?.employeeInformation.restaurantId);
+
+        const category = await getAllCategoryByRestaurantId(resId);
         res.status(200).json(category)
     } catch (error: any) {
         res.status(500).json({error: error.message});

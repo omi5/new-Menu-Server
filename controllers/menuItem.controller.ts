@@ -79,10 +79,11 @@ export const deleteMenuItemController = async(req: Request, res: Response)=>{
 }
 
 
-export const getAllMenuItemByRestaurantIdController = async(req: Request, res: Response)=>{
+export const getAllMenuItemByRestaurantIdController = async(req: AuthRequest, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
-        const mealItems = await getAllMenuItemByRestaurantId(id);
+        // const id: number = Number(req.params.id);
+        const resId: number = Number(req.user?.employeeInformation.restaurantId);
+        const mealItems = await getAllMenuItemByRestaurantId(resId);
         res.status(200).json(mealItems);
     } catch (error: any) {
         res.status(500).json({error: error.message});

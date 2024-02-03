@@ -5,7 +5,7 @@ import { authMiddleware } from '../middleware/auth.middleware';
 const router = express.Router();
 
 router.get('/',getAllMenuItemController);
-router.get('/restaurant/:id',getAllMenuItemByRestaurantIdController);
+router.get('/restaurant',authMiddleware,getAllMenuItemByRestaurantIdController);
 router.get('/:id',getMenuItemByIdController);
 router.post('/create',authMiddleware, createMenuItemController);
 router.put('/edit/:id',updateMenuItemByIdController);

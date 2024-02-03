@@ -1,11 +1,19 @@
 import { Request, Response } from "express";
 import { createRecipe, getAllRecipeByRestaurantId, getAllRecipe, getRecipeById, updateRecipeById,deleteRecipe } from "../models/recipes/recipe.query";
+import { AuthRequest } from "../interfaces/authRequest.interface";
 
 
 
-export const createRecipeController = async(req: Request, res: Response)=>{
+export const createRecipeController = async(req: AuthRequest, res: Response)=>{
     try {
         const objectOfRecipe = {...req.body}
+        const resId = req.user?.employeeInformation.restaurantId
+        if (resId) {
+            objectOfRecipe.restaurantId = resId;
+          } else {
+            // Handle the case when restaurantId is not available
+            console.error("Restaurant ID is not available.");
+          }
         const newRecipe = await createRecipe(objectOfRecipe);
         res.status(201).json(newRecipe)
     } catch (error: any) {
@@ -55,10 +63,12 @@ export const deleteRecipeController = async (req: Request, res: Response)=>{
     }  
 }
 
-export const getAllRecipeByRestaurantIdController = async(req: Request, res: Response)=>{
+export const getAllRecipeByRestaurantIdController = async(req: AuthRequest, res: Response)=>{
     try {
-        const id: number = Number(req.params.id);
-        const recipes = await getAllRecipeByRestaurantId(id);
+        // const id: number = Number(req.params.id);
+        const resId = Number(req.user?.employeeInformation.restaurantId)
+
+        const recipes = await getAllRecipeByRestaurantId(resId);
         res.status(200).json(recipes);
     } catch (error: any) {
         res.status(500).json({error: error.message});

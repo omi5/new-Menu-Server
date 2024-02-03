@@ -12,8 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllRecipeByRestaurantIdController = exports.deleteRecipeController = exports.updateRecipeByIdController = exports.getRecipeByIdController = exports.getAllRecipeController = exports.createRecipeController = void 0;
 const recipe_query_1 = require("../models/recipes/recipe.query");
 const createRecipeController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const objectOfRecipe = Object.assign({}, req.body);
+        const resId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.employeeInformation.restaurantId;
+        if (resId) {
+            objectOfRecipe.restaurantId = resId;
+        }
+        else {
+            // Handle the case when restaurantId is not available
+            console.error("Restaurant ID is not available.");
+        }
         const newRecipe = yield (0, recipe_query_1.createRecipe)(objectOfRecipe);
         res.status(201).json(newRecipe);
     }
@@ -67,9 +76,11 @@ const deleteRecipeController = (req, res) => __awaiter(void 0, void 0, void 0, f
 });
 exports.deleteRecipeController = deleteRecipeController;
 const getAllRecipeByRestaurantIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     try {
-        const id = Number(req.params.id);
-        const recipes = yield (0, recipe_query_1.getAllRecipeByRestaurantId)(id);
+        // const id: number = Number(req.params.id);
+        const resId = Number((_b = req.user) === null || _b === void 0 ? void 0 : _b.employeeInformation.restaurantId);
+        const recipes = yield (0, recipe_query_1.getAllRecipeByRestaurantId)(resId);
         res.status(200).json(recipes);
     }
     catch (error) {

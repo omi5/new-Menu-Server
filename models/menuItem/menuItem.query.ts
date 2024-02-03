@@ -23,9 +23,13 @@ const getAllMenuItemByRestaurantId = async(id: number)=>{
     //         },
     //       },
     // ])
-    const listOfMenuItems=await menuItemModel.find({restaurantId : id})
-
-    return listOfMenuItems;
+    try {
+        const listOfMenuItems = await menuItemModel.find({ restaurantId: id });
+        return listOfMenuItems;
+    } catch (error) {
+        console.error('Error in getAllMenuItemByRestaurantId:', error);
+        throw error; // Rethrow the error for better debugging
+    }
 }
 
 const getAllMenuItem = async()=>{

@@ -12,8 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllCategoryByRestaurantIdController = exports.getcategoryByUsingCategoryIdController = exports.deleteCategoryController = exports.updateCategoryByIdController = exports.getCategoriesByIdController = exports.getAllCategoriesController = exports.createCategoryController = void 0;
 const category_query_1 = require("../models/categories/category.query");
 const createCategoryController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const objectOfCategory = Object.assign({}, req.body);
+        const resId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.employeeInformation.restaurantId;
+        if (resId) {
+            objectOfCategory.restaurantId = resId;
+        }
+        else {
+            // Handle the case when restaurantId is not available
+            console.error("Restaurant ID is not available.");
+        }
         const category = yield (0, category_query_1.createCategory)(objectOfCategory);
         res.status(201).json(category);
     }
@@ -81,9 +90,11 @@ const getcategoryByUsingCategoryIdController = (req, res) => __awaiter(void 0, v
 });
 exports.getcategoryByUsingCategoryIdController = getcategoryByUsingCategoryIdController;
 const getAllCategoryByRestaurantIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     try {
-        const id = Number(req.params.id);
-        const category = yield (0, category_query_1.getAllCategoryByRestaurantId)(id);
+        // const id: number = Number(req.params.id);
+        const resId = Number((_b = req.user) === null || _b === void 0 ? void 0 : _b.employeeInformation.restaurantId);
+        const category = yield (0, category_query_1.getAllCategoryByRestaurantId)(resId);
         res.status(200).json(category);
     }
     catch (error) {

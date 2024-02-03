@@ -12,8 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllMenuItemByRestaurantIdController = exports.deleteMenuItemController = exports.updateMenuItemByIdController = exports.getMenuItemByIdController = exports.getAllMenuItemController = exports.createMenuItemController = void 0;
 const menuItem_query_1 = require("../models/menuItem/menuItem.query");
 const createMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const objectOfMenuItem = req.body;
+        const resId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.employeeInformation.restaurantId;
+        if (resId) {
+            objectOfMenuItem.restaurantId = resId;
+        }
+        else {
+            // Handle the case when restaurantId is not available
+            console.error("Restaurant ID is not available.");
+        }
         // if(objectOfMenuItem.Array)
         // console.log('objectOfMenuItem======',objectOfMenuItem);
         let menuItems = [];
@@ -78,9 +87,11 @@ const deleteMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0,
 });
 exports.deleteMenuItemController = deleteMenuItemController;
 const getAllMenuItemByRestaurantIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     try {
-        const id = Number(req.params.id);
-        const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(id);
+        // const id: number = Number(req.params.id);
+        const resId = Number((_b = req.user) === null || _b === void 0 ? void 0 : _b.employeeInformation.restaurantId);
+        const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(resId);
         res.status(200).json(mealItems);
     }
     catch (error) {

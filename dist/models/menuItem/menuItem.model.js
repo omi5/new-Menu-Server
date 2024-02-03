@@ -12,14 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.menuItemModel = void 0;
 const mongoose_1 = require("mongoose");
 const nextSequnece_1 = require("../../utils/nextSequnece");
-// const ItemDietaryRestrictions= new Schema<ItemDietaryRestrictionsInterface>({
-//     allergens: String
-// })
-// const packaging = new Schema<PackagingInterface>({
-//     dimensionLength: Number,
-//     dimensionWidth: Number,
-//     dimensionHeight: Number,
-// })
 const ingredients = new mongoose_1.Schema({
     id: Number,
     restaurantId: Number,
@@ -40,13 +32,9 @@ const addons = new mongoose_1.Schema({
     price: Number
 });
 const addOption = new mongoose_1.Schema({
-    // ingredientName: String,
-    // quantity: Number,
     ingredients: addons
 });
 const noOption = new mongoose_1.Schema({
-    // ingredientName: String,
-    // quantity: Number,
     ingredients: addons
 });
 const recipeItemSchema = new mongoose_1.Schema({

@@ -32,8 +32,14 @@ const getAllMenuItemByRestaurantId = (id) => __awaiter(void 0, void 0, void 0, f
     //         },
     //       },
     // ])
-    const listOfMenuItems = yield menuItem_model_1.menuItemModel.find({ restaurantId: id });
-    return listOfMenuItems;
+    try {
+        const listOfMenuItems = yield menuItem_model_1.menuItemModel.find({ restaurantId: id });
+        return listOfMenuItems;
+    }
+    catch (error) {
+        console.error('Error in getAllMenuItemByRestaurantId:', error);
+        throw error; // Rethrow the error for better debugging
+    }
 });
 exports.getAllMenuItemByRestaurantId = getAllMenuItemByRestaurantId;
 const getAllMenuItem = () => __awaiter(void 0, void 0, void 0, function* () {
