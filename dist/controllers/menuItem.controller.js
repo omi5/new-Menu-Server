@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllMenuItemByRestaurantIdController = exports.deleteMenuItemController = exports.updateMenuItemByIdController = exports.getMenuItemByIdController = exports.getAllMenuItemController = exports.createMenuItemController = void 0;
+exports.getAllMenuItemForMP = exports.getAllMenuItemByRestaurantIdForRecommendation = exports.getAllMenuItemByRestaurantIdController = exports.deleteMenuItemController = exports.updateMenuItemByIdController = exports.getMenuItemByIdController = exports.getAllMenuItemController = exports.createMenuItemController = void 0;
 const menuItem_query_1 = require("../models/menuItem/menuItem.query");
 const createMenuItemController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -99,3 +99,43 @@ const getAllMenuItemByRestaurantIdController = (req, res) => __awaiter(void 0, v
     }
 });
 exports.getAllMenuItemByRestaurantIdController = getAllMenuItemByRestaurantIdController;
+const getAllMenuItemByRestaurantIdForRecommendation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const recommendationArray = req.body;
+        // let mealItems:any
+        // let listOfItems:any;
+        // console.log('Recomm Array is: ', recommendationArray);
+        let menuItemForRecommendationEngine = [];
+        let promises = recommendationArray.map((restaurant) => __awaiter(void 0, void 0, void 0, function* () {
+            console.log('res', restaurant.restaurantId);
+            console.log('res type is: ', typeof restaurant.restaurantId);
+            const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(restaurant.restaurantId);
+            console.log('mealItems', mealItems);
+            //  const listOfItemsForRestaurant = mealItems.map((item: any) => item.listOfItems)
+            menuItemForRecommendationEngine.push({
+                restaurantId: restaurant.restaurantId,
+                items: mealItems
+            });
+            return mealItems;
+        }));
+        const result = yield Promise.all(promises);
+        console.log('recommendation', menuItemForRecommendationEngine);
+        res.status(200).json(menuItemForRecommendationEngine);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+exports.getAllMenuItemByRestaurantIdForRecommendation = getAllMenuItemByRestaurantIdForRecommendation;
+const getAllMenuItemForMP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = Number(req.params.id);
+        // const resId: number = Number(req.user?.employeeInformation.restaurantId);
+        const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(id);
+        res.status(200).json(mealItems);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+exports.getAllMenuItemForMP = getAllMenuItemForMP;

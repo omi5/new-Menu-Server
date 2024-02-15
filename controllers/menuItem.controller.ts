@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { createMenuItem,getAllMenuItem,getMenuItemById,updateMenuItemById,deleteMenuItem,getAllMenuItemByRestaurantId } from "../models/menuItem/menuItem.query";
 import { AuthRequest } from "../interfaces/authRequest.interface";
+import { recommendationInterface } from "../interfaces/recommendation.interface";
 
 
 export const createMenuItemController = async(req: AuthRequest, res: Response)=>{
@@ -90,6 +91,36 @@ export const getAllMenuItemByRestaurantIdController = async(req: AuthRequest, re
         
     }      
 
+}
+
+export const getAllMenuItemByRestaurantIdForRecommendation = async(req: Request, res: Response)=>{
+    try {
+        const recommendationArray: recommendationInterface[] = req.body;
+        // let mealItems:any
+        // let listOfItems:any;
+        // console.log('Recomm Array is: ', recommendationArray);
+        let menuItemForRecommendationEngine: any[] = []
+        let promises = recommendationArray.map(async (restaurant:recommendationInterface)=>{
+            console.log('res',restaurant.restaurantId);
+            console.log('res type is: ', typeof restaurant.restaurantId);
+            
+         const mealItems = await getAllMenuItemByRestaurantId(restaurant.restaurantId);
+         console.log('mealItems',mealItems)
+        //  const listOfItemsForRestaurant = mealItems.map((item: any) => item.listOfItems)
+         menuItemForRecommendationEngine.push({
+            restaurantId: restaurant.restaurantId,
+            items: mealItems
+         })
+         return mealItems;
+        })
+        const result = await Promise.all(promises);
+        console.log('recommendation',menuItemForRecommendationEngine);
+        
+        res.status(200).json(menuItemForRecommendationEngine);
+    } catch (error: any) {
+        res.status(500).json({error: error.message});
+        
+    }      
 }
 
 export const getAllMenuItemForMP = async(req: Request, res: Response)=>{
