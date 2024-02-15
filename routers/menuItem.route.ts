@@ -4,6 +4,7 @@ import { authMiddleware } from '../middleware/auth.middleware';
 
 const router = express.Router();
 
+
 router.get('/',getAllMenuItemController);
 router.get('/restaurant',authMiddleware,getAllMenuItemByRestaurantIdController);
 router.post('/get-menu-for-recommendation',getAllMenuItemByRestaurantIdForRecommendation)
