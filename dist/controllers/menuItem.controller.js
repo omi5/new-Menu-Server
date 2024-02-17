@@ -112,11 +112,20 @@ const getAllMenuItemByRestaurantIdForRecommendation = (req, res) => __awaiter(vo
             const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(restaurant.restaurantId);
             console.log('mealItems', mealItems);
             //  const listOfItemsForRestaurant = mealItems.map((item: any) => item.listOfItems)
+            let items = mealItems.map(item => {
+                var _a, _b;
+                return {
+                    _id: item._id,
+                    itemName: (_a = item.item) === null || _a === void 0 ? void 0 : _a.itemName,
+                    itemProfileTastyTags: (_b = item.item) === null || _b === void 0 ? void 0 : _b.itemProfileTastyTags
+                };
+            });
+            console.log('items', items);
             menuItemForRecommendationEngine.push({
                 restaurantId: restaurant.restaurantId,
-                items: mealItems
+                items: items
             });
-            return mealItems;
+            return items;
         }));
         const result = yield Promise.all(promises);
         console.log('recommendation', menuItemForRecommendationEngine);

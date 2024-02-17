@@ -107,11 +107,22 @@ export const getAllMenuItemByRestaurantIdForRecommendation = async(req: Request,
          const mealItems = await getAllMenuItemByRestaurantId(restaurant.restaurantId);
          console.log('mealItems',mealItems)
         //  const listOfItemsForRestaurant = mealItems.map((item: any) => item.listOfItems)
+        let items = mealItems.map(item =>{
+           return {
+                _id :item._id,
+                itemName: item.item?.itemName,
+                itemProfileTastyTags: item.item?.itemProfileTastyTags
+
+            }
+        })
+
+        // console.log('items',items);
+        
          menuItemForRecommendationEngine.push({
             restaurantId: restaurant.restaurantId,
-            items: mealItems
+            items: items
          })
-         return mealItems;
+         return items;
         })
         const result = await Promise.all(promises);
         console.log('recommendation',menuItemForRecommendationEngine);
