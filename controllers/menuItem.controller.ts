@@ -95,16 +95,16 @@ export const getAllMenuItemByRestaurantIdController = async(req: AuthRequest, re
 
 export const getAllMenuItemByRestaurantIdForRecommendation = async(req: Request, res: Response)=>{
     try {
-        const recommendationArray: recommendationInterface[] = req.body;
+        const recommendationArray: number[] = req.body.ids;
         // let mealItems:any
         // let listOfItems:any;
         // console.log('Recomm Array is: ', recommendationArray);
         let menuItemForRecommendationEngine: any[] = []
-        let promises = recommendationArray.map(async (restaurant:recommendationInterface)=>{
-            console.log('res',restaurant.restaurantId);
-            console.log('res type is: ', typeof restaurant.restaurantId);
+        let promises = recommendationArray.map(async (restaurantId:number)=>{
+            console.log('res',restaurantId);
+            console.log('res type is: ', typeof restaurantId);
             
-         const mealItems = await getAllMenuItemByRestaurantId(restaurant.restaurantId);
+         const mealItems = await getAllMenuItemByRestaurantId(restaurantId);
          console.log('mealItems',mealItems)
         //  const listOfItemsForRestaurant = mealItems.map((item: any) => item.listOfItems)
         let items = mealItems.map(item =>{
@@ -119,7 +119,7 @@ export const getAllMenuItemByRestaurantIdForRecommendation = async(req: Request,
         // console.log('items',items);
         
          menuItemForRecommendationEngine.push({
-            restaurantId: restaurant.restaurantId,
+            restaurantId: restaurantId,
             items: items
          })
          return items;

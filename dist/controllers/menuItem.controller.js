@@ -101,15 +101,15 @@ const getAllMenuItemByRestaurantIdController = (req, res) => __awaiter(void 0, v
 exports.getAllMenuItemByRestaurantIdController = getAllMenuItemByRestaurantIdController;
 const getAllMenuItemByRestaurantIdForRecommendation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const recommendationArray = req.body;
+        const recommendationArray = req.body.ids;
         // let mealItems:any
         // let listOfItems:any;
         // console.log('Recomm Array is: ', recommendationArray);
         let menuItemForRecommendationEngine = [];
-        let promises = recommendationArray.map((restaurant) => __awaiter(void 0, void 0, void 0, function* () {
-            console.log('res', restaurant.restaurantId);
-            console.log('res type is: ', typeof restaurant.restaurantId);
-            const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(restaurant.restaurantId);
+        let promises = recommendationArray.map((restaurantId) => __awaiter(void 0, void 0, void 0, function* () {
+            console.log('res', restaurantId);
+            console.log('res type is: ', typeof restaurantId);
+            const mealItems = yield (0, menuItem_query_1.getAllMenuItemByRestaurantId)(restaurantId);
             console.log('mealItems', mealItems);
             //  const listOfItemsForRestaurant = mealItems.map((item: any) => item.listOfItems)
             let items = mealItems.map(item => {
@@ -120,9 +120,9 @@ const getAllMenuItemByRestaurantIdForRecommendation = (req, res) => __awaiter(vo
                     itemProfileTastyTags: (_b = item.item) === null || _b === void 0 ? void 0 : _b.itemProfileTastyTags
                 };
             });
-            console.log('items', items);
+            // console.log('items',items);
             menuItemForRecommendationEngine.push({
-                restaurantId: restaurant.restaurantId,
+                restaurantId: restaurantId,
                 items: items
             });
             return items;
