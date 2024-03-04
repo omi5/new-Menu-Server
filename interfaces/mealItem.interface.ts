@@ -40,6 +40,8 @@ export interface ItemInterface {
 	
     itemId: number,
     itemName: string,
+    enabledInPos : boolean,
+    enabledInMarketplace: boolean,
 	itemImage: string,
 	itemDescription?: string,
 	itemPrice: number,
