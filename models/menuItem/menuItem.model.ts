@@ -45,8 +45,14 @@ const recipeItemSchema = new Schema({
 const itemSchema = new Schema<ItemInterface>({
     itemId: {type: Number},
 	itemName: String,
-    enabledInPos : Boolean,
-    enabledInMarketplace: Boolean,
+    availableInPos: {
+        type: Boolean,
+        default: true 
+      },
+      availableInMarketPlace: {
+        type: Boolean,
+        default: true 
+      },
 	itemImage: String,
 	itemDescription: String,
 	itemPrice: Number,
